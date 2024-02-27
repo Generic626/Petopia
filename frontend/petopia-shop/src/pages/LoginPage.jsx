@@ -36,7 +36,7 @@ const LoginPage = () => {
         >
           {/* Email input */}
           <TextField
-            margin="normal"
+            margin="dense"
             required
             fullWidth
             id="email"
@@ -51,7 +51,7 @@ const LoginPage = () => {
           />
           {/* Password input */}
           <TextField
-            margin="normal"
+            margin="dense"
             required
             fullWidth
             name="password"
