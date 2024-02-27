@@ -135,7 +135,7 @@ const SignUpPage = () => {
           </button>
           {/* Already have an account link */}
           <div className="w-full mt-2">
-            <NavLink to="/">
+            <NavLink to="/login">
               <span className="text-sm underline text-slate-400 italic">
                 Already have an account?
               </span>
