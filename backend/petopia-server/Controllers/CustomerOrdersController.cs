@@ -17,7 +17,7 @@ public class CustomerOrdersController(MyDbContext context) : ControllerBase
 
         if (customerOrder.Count == 0)
         {
-            return NotFound(new { message = "Order does not exist" });
+            return NotFound();
         }
 
         // Get customer

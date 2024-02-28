@@ -2,7 +2,9 @@
 // POST http://localhost:5290/api/Customers/Register
 // {
 //     "customerUsername": "customer_a1", // required
-//     "customerPassword": "customer_a1" // required
+//     "customerPassword": "customer_a1", // required
+//     "customerContact": "12345678",
+//     "customerAddress": "HK"
 // }
 
 // Login customer
@@ -10,6 +12,16 @@
 // {
 //     "customerUsername": "customer_a1", // required
 //     "customerPassword": "customer_a1" // required
+// }
+
+// Modify customer
+// POST http://localhost:5290/api/Customers/Modify
+// {
+//     "customerUsername": "customer_a1", // required
+//     "customerPassword": "customer_a1", // required
+//     "customerContact": "12345678",
+//     "customerAddress": "HK",
+//     "newPassword": "1234abcd!"
 // }
 
 /* ############################################################ */
@@ -37,7 +49,7 @@
 //     "productPrice": 12.5,
 //     "productQuantity": 36,
 //     "productKeywords": "Cat, Food, Vegetable",
-    // "categoryId": 2
+//     "categoryId": 2
 // }
 
 // Get all products
@@ -51,11 +63,11 @@
 // Create orders
 // POST http://localhost:5290/api/CustomerOrders/Create
 // {
-//     "customerId": "1", // required
-//     "products": [ // required
+//     "customerId": "1",               // required
+//     "products": [                    // required at least one
 //         {
-//             "productId": "1",
-//             "orderedQuantity": 5
+//             "productId": "1",        // required
+//             "orderedQuantity": 5     // required
 //         },
 //         {
 //             "productId": "2",
