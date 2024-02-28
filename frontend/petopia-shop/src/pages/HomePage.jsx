@@ -39,10 +39,20 @@ const HomePage = () => {
       {/* Category Displacement */}
       <section className="flex w-full items-center justify-center gap-8">
         {/* Dog Option */}
-        <CategoryOption src={dogLogo} alt="Dog option" title="Dog Products" />
+        <CategoryOption
+          path="dog"
+          src={dogLogo}
+          alt="Dog option"
+          title="Dog Products"
+        />
 
         {/* Cat Option */}
-        <CategoryOption src={catLogo} alt="Cat option" title="Cat Products" />
+        <CategoryOption
+          path="cat"
+          src={catLogo}
+          alt="Cat option"
+          title="Cat Products"
+        />
       </section>
     </NavbarLayout>
   );

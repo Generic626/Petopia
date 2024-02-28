@@ -13,8 +13,12 @@ const Navbar = () => {
           alt="petopia brand logo"
           className="h-[60px] w-[60px] mr-2"
         />
-        <button className="font-semibold">Dog</button>
-        <button className="font-semibold">Cat</button>
+        <NavLink to="/product/dog" className="font-semibold flex items-center">
+          Dog
+        </NavLink>
+        <NavLink to="/product/cat" className="font-semibold flex items-center">
+          Cat
+        </NavLink>
       </div>
 
       {/* Right side nav items */}
