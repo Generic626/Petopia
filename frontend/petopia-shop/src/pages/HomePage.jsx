@@ -24,7 +24,7 @@ const HomePage = () => {
         <div className="bg-primary h-full w-full absolute inset-0 opacity-70 text-white" />
         {/* Brand title */}
         <div className="absolute inset-0 text-white flex flex-col items-center justify-center">
-          <h1 className="text-[60px] font-[600] mb-4">Welcome to Petopia</h1>
+          <h1 className="text-[60px] font-semibold mb-4">Welcome to Petopia</h1>
           <span className="text-xl">
             You're one stop shop for ALL your pet's needs
           </span>

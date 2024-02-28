@@ -11,7 +11,7 @@ const Footer = () => {
           alt="petopia brand logo"
           className="h-[60px] w-[60px] mr-2"
         />
-        <span className="font-[600]">Petopia - Pet shop</span>
+        <span className="font-semibold">Petopia - Pet shop</span>
       </div>
       {/* Disclaimer */}
       <span className="text-xs">©2024 All rights reserved.</span>
