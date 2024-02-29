@@ -31,13 +31,13 @@ const HomePage = () => {
         </div>
       </section>
       {/* Call to Action */}
-      <section className="flex flex-col items-center justify-center mb-8">
+      <section className="flex flex-col items-center justify-center mb-8 ">
         <h1 className="text-2xl font-[400]">
           Browse from our category of products
         </h1>
       </section>
       {/* Category Displacement */}
-      <section className="flex w-full items-center justify-center gap-8">
+      <section className="flex w-full items-center justify-center gap-8 h-[500px]">
         {/* Dog Option */}
         <CategoryOption
           path="dog"

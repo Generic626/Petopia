@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 const NavbarLayout = (props) => {
   return (
-    <div className="w-screen h-screen mt-[60px]">
+    <div className="w-screen mt-[60px]">
       {/* Top Nav bar */}
       <Navbar />
       {/* Main Content */}
