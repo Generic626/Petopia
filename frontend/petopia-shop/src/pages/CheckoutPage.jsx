@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import NavbarLayout from "../layout/NavbarLayout";
 import CheckoutProduct from "../components/CheckoutProduct";
+import CheckoutSuccess from "../components/CheckoutSuccess";
 import Product1 from "../assets/product_1.webp";
 import Product2 from "../assets/product_2.webp";
-import { useNavigate } from "react-router-dom";
+import { AiFillCheckCircle } from "react-icons/ai";
 
 const CheckoutPage = () => {
-    let navigate = useNavigate();
-    const routeChange = () => {
-        let path = '/checkout-success';
-        navigate(path);
-    }
+  const [isSuccess, setIsSuccess] = useState(false);
+  let element = document.getElementById("detail");
+
+  const handleSubmit = event => {
+    event.preventDefault();
+  }
   return (
     <NavbarLayout>
       <div className=" m-auto w-[400px] p-5 justify-center flex flex-col">
@@ -19,7 +21,12 @@ const CheckoutPage = () => {
           <hr className="text-neutral-400 bg-neutral-400 h-0.5" />
         </div>
         <br />
-        <div id="detail" style={{ backgroundImage: "" }}>
+
+        {/* Show Success */}
+        {isSuccess && <CheckoutSuccess />}
+        {isSuccess && element.setAttribute("hidden", "hidden")}
+
+        <div id="detail">
           <div className="ring-2 rounded-lg ring-neutral-400">
             <CheckoutProduct
               src={Product1}
@@ -40,6 +47,7 @@ const CheckoutPage = () => {
             </h1>
           </div>
           <form
+          onSubmit={handleSubmit}
             action=""
             className="flex flex-col justify-center p-2 text-left"
           >
@@ -55,7 +63,7 @@ const CheckoutPage = () => {
             <button
               type="submit"
               className="bg-primary h-[40px] w-full text-white rounded-full mt-4"
-              onClick={routeChange}
+              onClick={() => setIsSuccess(true)}
             >
               Make Order
             </button>
