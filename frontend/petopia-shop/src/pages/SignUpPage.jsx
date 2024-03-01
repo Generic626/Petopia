@@ -133,6 +133,12 @@ const SignUpPage = () => {
           >
             Submit
           </button>
+          <NavLink
+            to="/"
+            className="hover:bg-primary border ease-linear duration-200 border-primary h-[40px] w-full text-primary hover:text-white rounded-full mt-4 flex items-center justify-center"
+          >
+            Head Back to Home
+          </NavLink>
           {/* Already have an account link */}
           <div className="w-full mt-2">
             <NavLink to="/login">
