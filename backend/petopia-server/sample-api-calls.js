@@ -43,12 +43,14 @@
 
 // Create products
 // POST http://localhost:5290/api/Products/Create
+// * FormData (multipart/form-data), you can use form-data in Postman to test this API, image will be upload to [serverAddress/wwwroot/images]
 // {
 //     "productName": "VegiC", // required
 //     "productDescription": "Vegetable for feeding cats",
 //     "productPrice": 12.5,
 //     "productQuantity": 36,
 //     "productKeywords": "Cat, Food, Vegetable",
+//     "productImage": Binary File,
 //     "categoryId": 2
 // }
 

@@ -1,13 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using petopia_server;
 using petopia_server.Models;
+using petopia_server.Helper;
 using Microsoft.EntityFrameworkCore;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CategoriesController(MyDbContext context) : ControllerBase
+public class CategoriesController(MyDbContext context, UrlHelper urlHelper) : ControllerBase
 {
     private readonly MyDbContext _context = context;
+    private readonly UrlHelper _urlHelper = urlHelper;
 
     // GET: api/Categories/All
     [HttpGet("All")]
@@ -26,7 +28,8 @@ public class CategoriesController(MyDbContext context) : ControllerBase
                     ProductDescription = p.ProductDescription,
                     ProductPrice = p.ProductPrice,
                     ProductQuantity = p.ProductQuantity,
-                    ProductKeywords = p.ProductKeywords
+                    ProductKeywords = p.ProductKeywords,
+                    ProductImage = _urlHelper.GetImageFullPath(p.ProductImage)
                 })
                 .OrderBy(p => p.ProductId)
                 .ToList()
@@ -52,7 +55,8 @@ public class CategoriesController(MyDbContext context) : ControllerBase
                     ProductDescription = p.ProductDescription,
                     ProductPrice = p.ProductPrice,
                     ProductQuantity = p.ProductQuantity,
-                    ProductKeywords = p.ProductKeywords
+                    ProductKeywords = p.ProductKeywords,
+                    ProductImage = _urlHelper.GetImageFullPath(p.ProductImage)
                 })
                 .OrderBy(p => p.ProductId)
                 .ToList()

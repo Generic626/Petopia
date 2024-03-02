@@ -1,13 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using petopia_server;
 using petopia_server.Models;
+using petopia_server.Helper;
 using Microsoft.EntityFrameworkCore;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CustomerOrdersController(MyDbContext context) : ControllerBase
+public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) : ControllerBase
 {
     private readonly MyDbContext _context = context;
+    private readonly UrlHelper _urlHelper = urlHelper;
 
     // GET: api/CustomerOrders/Order/{id}
     [HttpGet("Order/{id}")]
@@ -42,6 +44,7 @@ public class CustomerOrdersController(MyDbContext context) : ControllerBase
                 ProductPrice = c.Product.ProductPrice,
                 OrderedQuantity = c.OrderedQuantity,
                 ProductKeywords = c.Product.ProductKeywords,
+                ProductImage = _urlHelper.GetImageFullPath(c.Product.ProductImage),
                 Category = c.Product.Category == null ? null : new CategoryDTONoProducts
                 {
                     CategoryId = c.Product.Category.CategoryId,
@@ -92,6 +95,7 @@ public class CustomerOrdersController(MyDbContext context) : ControllerBase
                     ProductPrice = c.Product.ProductPrice,
                     OrderedQuantity = c.OrderedQuantity,
                     ProductKeywords = c.Product.ProductKeywords,
+                    ProductImage = _urlHelper.GetImageFullPath(c.Product.ProductImage),
                     Category = c.Product.Category == null ? null : new CategoryDTONoProducts
                     {
                         CategoryId = c.Product.Category.CategoryId,
@@ -215,6 +219,7 @@ public class CustomerOrdersController(MyDbContext context) : ControllerBase
                 ProductPrice = c.ProductPrice,
                 OrderedQuantity = customerOrder.Products.First(p => p.ProductId == c.ProductId).OrderedQuantity,
                 ProductKeywords = c.ProductKeywords,
+                ProductImage = _urlHelper.GetImageFullPath(c.ProductImage),
                 Category = c.Category == null ? null : new CategoryDTONoProducts
                 {
                     CategoryId = c.Category.CategoryId,

@@ -13,7 +13,8 @@
 //                 "productDescription": "Meat for feeding dogs",
 //                 "productPrice": 32.50,
 //                 "productQuantity": 12,
-//                 "productKeywords": "Dog, Food, Meat"
+//                 "productKeywords": "Dog, Food, Meat",
+//                 "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png"
 //             }
 //         ]
 //     },
@@ -28,7 +29,8 @@
 //                 "productDescription": "Vegetable for feeding cats",
 //                 "productPrice": 12.50,
 //                 "productQuantity": 36,
-//                 "productKeywords": "Cat, Food, Vegetable"
+//                 "productKeywords": "Cat, Food, Vegetable",
+//                 "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png"
 //             }
 //         ]
 //     }
@@ -50,7 +52,8 @@
 //             "productDescription": "Meat for feeding dogs",
 //             "productPrice": 32.50,
 //             "productQuantity": 12,
-//             "productKeywords": "Dog, Food, Meat"
+//             "productKeywords": "Dog, Food, Meat",
+//             "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png"
 //         }
 //     ]
 // }
@@ -68,6 +71,7 @@
 //         "productPrice": 32.50,
 //         "productQuantity": 12,
 //         "productKeywords": "Dog, Food, Meat",
+//         "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png",
 //         "category": {
 //             "categoryId": 1,
 //             "categoryName": "Dogs",
@@ -81,6 +85,7 @@
 //         "productPrice": 12.50,
 //         "productQuantity": 36,
 //         "productKeywords": "Cat, Food, Vegetable",
+//         "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png",
 //         "category": {
 //             "categoryId": 2,
 //             "categoryName": "Cats",
@@ -101,6 +106,7 @@
 //     "productPrice": 32.50,
 //     "productQuantity": 12,
 //     "productKeywords": "Dog, Food, Meat",
+//     "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png",
 //     "category": {
 //         "categoryId": 1,
 //         "categoryName": "Dogs",
@@ -130,6 +136,7 @@
 //             "productPrice": 32.50,
 //             "orderedQuantity": 5,
 //             "productKeywords": "Dog, Food, Meat",
+//             "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png",
 //             "category": {
 //                 "categoryId": 1,
 //                 "categoryName": "Dogs",
@@ -143,6 +150,7 @@
 //             "productPrice": 12.50,
 //             "orderedQuantity": 10,
 //             "productKeywords": "Cat, Food, Vegetable",
+//             "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png",
 //             "category": {
 //                 "categoryId": 2,
 //                 "categoryName": "Cats",
@@ -170,6 +178,7 @@
 //                 "productPrice": 32.50,
 //                 "orderedQuantity": 5,
 //                 "productKeywords": "Dog, Food, Meat",
+//                 "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png",
 //                 "category": {
 //                     "categoryId": 1,
 //                     "categoryName": "Dogs",
@@ -183,6 +192,7 @@
 //                 "productPrice": 12.50,
 //                 "orderedQuantity": 10,
 //                 "productKeywords": "Cat, Food, Vegetable",
+//                 "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png",
 //                 "category": {
 //                     "categoryId": 2,
 //                     "categoryName": "Cats",
@@ -203,6 +213,7 @@
 //                 "productPrice": 32.50,
 //                 "orderedQuantity": 1,
 //                 "productKeywords": "Dog, Food, Meat",
+//                 "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png",
 //                 "category": {
 //                     "categoryId": 1,
 //                     "categoryName": "Dogs",
@@ -216,6 +227,7 @@
 //                 "productPrice": 12.50,
 //                 "orderedQuantity": 1,
 //                 "productKeywords": "Cat, Food, Vegetable",
+//                 "productImage": "http://localhost:5290/images/87d76107-5c3a-4699-bbae-4191c617d26d.png",
 //                 "category": {
 //                     "categoryId": 2,
 //                     "categoryName": "Cats",

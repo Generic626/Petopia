@@ -1,13 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using petopia_server;
 using petopia_server.Models;
+using petopia_server.Helper;
 using Microsoft.EntityFrameworkCore;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProductsController(MyDbContext context) : ControllerBase
+public class ProductsController(MyDbContext context, UrlHelper urlHelper) : ControllerBase
 {
     private readonly MyDbContext _context = context;
+    private readonly UrlHelper _urlHelper = urlHelper;
 
     // GET: api/Products/All
     [HttpGet("All")]
@@ -22,6 +24,7 @@ public class ProductsController(MyDbContext context) : ControllerBase
                 ProductPrice = p.ProductPrice,
                 ProductQuantity = p.ProductQuantity,
                 ProductKeywords = p.ProductKeywords,
+                ProductImage = _urlHelper.GetImageFullPath(p.ProductImage),
                 Category = p.Category == null ? null : new CategoryDTONoProducts
                 {
                     CategoryId = p.Category.CategoryId,
@@ -46,6 +49,7 @@ public class ProductsController(MyDbContext context) : ControllerBase
                 ProductPrice = p.ProductPrice,
                 ProductQuantity = p.ProductQuantity,
                 ProductKeywords = p.ProductKeywords,
+                ProductImage = _urlHelper.GetImageFullPath(p.ProductImage),
                 Category = p.Category == null ? null : new CategoryDTONoProducts
                 {
                     CategoryId = p.Category.CategoryId,
@@ -65,11 +69,27 @@ public class ProductsController(MyDbContext context) : ControllerBase
 
     // POST: api/Products/Create
     [HttpPost("Create")]
-    public async Task<ActionResult<ProductDTO>> CreateProduct(Product Product)
+    public async Task<ActionResult<ProductDTO>> CreateProduct([FromForm] ProductDTO_FORM_CREATE Product)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
+        }
+
+        var imageName = "";
+
+        // Save image to server
+        if (Product.ProductImage != null)
+        {
+            var image = Product.ProductImage;
+            var imagePath = "";
+            do
+            {
+                imageName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+                imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", imageName);
+            } while (System.IO.File.Exists(imagePath));
+            using var fileStream = new FileStream(imagePath, FileMode.Create);
+            await image.CopyToAsync(fileStream);
         }
 
         Product product = new()
@@ -79,6 +99,7 @@ public class ProductsController(MyDbContext context) : ControllerBase
             ProductPrice = Product.ProductPrice ?? null,
             ProductQuantity = Product.ProductQuantity ?? null,
             ProductKeywords = Product.ProductKeywords ?? "",
+            ProductImage = imageName == "" ? null : imageName,
             CategoryId = Product.CategoryId ?? null
         };
 
@@ -113,6 +134,7 @@ public class ProductsController(MyDbContext context) : ControllerBase
             ProductPrice = product.ProductPrice,
             ProductQuantity = product.ProductQuantity,
             ProductKeywords = product.ProductKeywords,
+            ProductImage = _urlHelper.GetImageFullPath(product.ProductImage),
             Category = product.Category == null ? null : new CategoryDTONoProducts
             {
                 CategoryId = product.Category.CategoryId,
