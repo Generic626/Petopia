@@ -21,7 +21,7 @@
 
 LOCK TABLES `Products` WRITE;
 /*!40000 ALTER TABLE `Products` DISABLE KEYS */;
-INSERT INTO `Products` VALUES (1,'MeatD','Meat for feeding dogs',32.50,12,'Dog, Food, Meat',1),(2,'VegiC','Vegetable for feeding cats',12.50,36,'Cat, Food, Vegetable',2);
+INSERT INTO `Products` VALUES (1,'MeatD','Meat for feeding dogs',32.50,12,'Dog, Food, Meat', 'product_1.webp',1),(2,'VegiC','Vegetable for feeding cats',12.50,36,'Cat, Food, Vegetable', 'product_2.webp',2);
 /*!40000 ALTER TABLE `Products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
