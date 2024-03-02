@@ -4,15 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using petopia_server; // Replace with the actual namespace of your project
 
 var builder = WebApplication.CreateBuilder(args);
-var allowedOrigins = new string[] { "http://localhost:*" };
 
 // Add CORS
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
-        builder => builder.WithOrigins(allowedOrigins)
-            .AllowAnyHeader()
-            .AllowAnyMethod());
+        builder => builder.SetIsOriginAllowed(origin => new Uri(origin).IsLoopback)
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
 
 // Add services to the container.
