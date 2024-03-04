@@ -4,7 +4,7 @@ import CartProduct from "../components/CartProduct";
 import Product1 from "../assets/product_1.webp";
 import Product2 from "../assets/product_2.webp";
 
-const UserKartPage = () => {
+const UserCartPage = () => {
   return (
     <NavbarLayout>
       <div className="m-auto h-screen p-5 justify-left flex flex-col">
@@ -50,4 +50,4 @@ const UserKartPage = () => {
   );
 };
 
-export default UserKartPage;
+export default UserCartPage;
