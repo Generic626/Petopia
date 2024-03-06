@@ -7,11 +7,15 @@ import CheckoutPage from "./pages/CheckoutPage";
 import UserCartPage from "./pages/UserCartPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 
+import AdminLoginPage from "./pages/AdminLoginPage";
+
 const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/admin" element={<AdminLoginPage />} />
+
       <Route path="/sign-up" element={<SignUpPage />} />
       <Route path="/product/:category" element={<ProductPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />

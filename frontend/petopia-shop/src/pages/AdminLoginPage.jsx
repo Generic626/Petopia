@@ -28,7 +28,7 @@ const LoginPage = () => {
             alt="petopia brand logo"
             className="h-[60px] w-[60px] mr-2"
           />
-          <span className="font-[600px] text-3xl">Welcome Back</span>
+          <span className="font-[600px] text-3xl">Admin Login</span>
         </div>
         {/* Form */}
         <form
@@ -80,8 +80,7 @@ const LoginPage = () => {
           </NavLink>
           {/* Don't have account link */}
           <div className="w-full mt-2 flex flex-col">
-            <TipLink path="/sign-up" text="Don&#39;t have an account?" />
-            <TipLink path="/admin" text="Admin Login" />
+            <TipLink path="/login" text="Customer Login" />
           </div>
         </form>
       </div>
