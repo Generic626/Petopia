@@ -29,7 +29,7 @@ public partial class CustomersController(MyDbContext context) : ControllerBase
 
     // GET: api/Customers/{id}
     // [HttpGet("{id}")]
-    public async Task<ActionResult<CustomerDTO>> GetCustomer(int id)
+    public async Task<ActionResult<CustomerDTO>> GetCustomer(Guid id)
     {
         var Customer = await _context.Customers
             .Select(c => new CustomerDTO

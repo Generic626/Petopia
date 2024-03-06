@@ -13,7 +13,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
 
     // GET: api/CustomerOrders/Order/{id}
     [HttpGet("Order/{id}")]
-    public async Task<ActionResult<CustomerOrderDTO_ORDER>> GetCustomerOrder(int id)
+    public async Task<ActionResult<CustomerOrderDTO_ORDER>> GetCustomerOrder(string id)
     {
         var customerOrder = await _context.CustomerOrders.Where(c => c.OrderId == id).ToListAsync();
 
@@ -62,7 +62,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
             Customer = customer,
             Products = products,
             OrderStatus = customerOrder[0].OrderStatus,
-            CreatedAt = customerOrder[0].CreatedAt
+            CreatedAt = customerOrder[0].CreatedAt.ToString("yyyy-MM-ddTHH:mm:ss")
         };
 
         return customerOrderDTO;
@@ -70,11 +70,11 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
 
     // GET: api/CustomerOrders/Customer/{id}
     [HttpGet("Customer/{id}")]
-    public async Task<ActionResult<IEnumerable<CustomerOrderDTO_CUSTOMER>>> GetCustomerOrders(int id)
+    public async Task<ActionResult<IEnumerable<CustomerOrderDTO_CUSTOMER>>> GetCustomerOrders(string id)
     {
         // Get orders
         var customerOrders = await _context.CustomerOrders
-            .Where(c => c.CustomerId == id)
+            .Where(c => c.CustomerId.ToString() == id)
             .GroupBy(c => c.OrderId)
             .Select(g => g.First())
             .ToListAsync();
@@ -143,10 +143,9 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
             return BadRequest(new { message = "Products must be provided" });
         }
 
-        // Set the next OrderId
-        var notEmpty = await _context.CustomerOrders.AnyAsync();
-        var largestOrderId = notEmpty ? await _context.CustomerOrders.MaxAsync(c => c.OrderId) : 0;
-        var nextOrderId = largestOrderId + 1;
+        var currentTime = DateTime.Now.ToString("yyyyMMddHHmmss");
+        var newGuid = Guid.NewGuid().ToString().Split('-')[0]; // Get the first part of the GUID
+        var nextOrderId = $"{newGuid}{currentTime}";
 
         // Create a list to save the products
         IEnumerable<Product> productExistsList = [];
@@ -175,8 +174,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
                 ProductId = productExists.ProductId,
                 Product = productExists,
                 OrderedQuantity = product.OrderedQuantity,
-                OrderStatus = customerOrder.OrderStatus,
-                CreatedAt = DateTime.Now
+                OrderStatus = customerOrder.OrderStatus
             };
 
             try
@@ -229,7 +227,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
             })
             .OrderBy(c => c.ProductId)],
             OrderStatus = customerOrder.OrderStatus,
-            CreatedAt = DateTime.Now
+            CreatedAt = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")
         };
 
         return CreatedAtAction("GetCustomerOrder", new { id = nextOrderId }, customerOrderDTO);
