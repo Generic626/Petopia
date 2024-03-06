@@ -39,15 +39,23 @@ namespace petopia_server.Models
         public string? CustomerContact { get; set; }
         public string? CustomerAddress { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string? Token { get; set; }
+    }
+
+    public class CustomerDTO_PRINT
+    {
+        public Guid CustomerId { get; set; }
+        public required string CustomerUsername { get; set; }
+        public string? CustomerContact { get; set; }
+        public string? CustomerAddress { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 
     public class CustomerDTO_MODIFY
     {
         public Guid CustomerId { get; set; }
-        public required string CustomerUsername { get; set; }
-        public required string CustomerPassword { get; set; }
-        public string? CustomerContact { get; set; }
-        public string? CustomerAddress { get; set; }
+        public string? NewContact { get; set; }
+        public string? NewAddress { get; set; }
         public string? NewPassword { get; set; }
     }
 }

@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using petopia_server;
 using petopia_server.Models;
-using petopia_server.Helper;
+using petopia_server.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -24,7 +26,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
 
         // Get customer
         var customer = await _context.Customers
-            .Select(c => new CustomerDTO
+            .Select(c => new CustomerDTO_PRINT
             {
                 CustomerId = c.CustomerId,
                 CustomerUsername = c.CustomerUsername,
@@ -52,7 +54,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
                     CategoryDescription = c.Product.Category.CategoryDescription
                 }
             })
-            .OrderBy(c => c.ProductId)
+            .OrderBy(c => c.ProductName)
             .ToListAsync();
 
         // Create the DTO
@@ -103,7 +105,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
                         CategoryDescription = c.Product.Category.CategoryDescription
                     }
                 })
-                .OrderBy(c => c.ProductId)
+                .OrderBy(c => c.ProductName)
                 .ToListAsync();
 
             // Create the DTO
@@ -123,7 +125,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
     }
 
     // POST: api/CustomerOrders/Create
-    [HttpPost("Create")]
+    [HttpPost("Create")][Authorize(Roles = "Customer")]
     public async Task<ActionResult<CustomerOrderDTO_ORDER>> PostCustomerOrders(CustomerOrderDTO_CREATE customerOrder)
     {
         if (!ModelState.IsValid)
@@ -132,10 +134,19 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
         }
 
         // Check if customer exists
-        var customerExists = await _context.Customers.FindAsync(customerOrder.CustomerId);
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
+
+        var customerExists = await _context.Customers
+            .Where(c => c.CustomerId == Guid.Parse(userId.Value))
+            .FirstOrDefaultAsync();
+
         if (customerExists == null)
         {
-            return BadRequest(new { message = "Customer does not exist" });
+            return Unauthorized();
         }
 
         if (customerOrder.Products == null || customerOrder.Products.Count == 0)
@@ -201,7 +212,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
         CustomerOrderDTO_ORDER customerOrderDTO = new()
         {
             OrderId = nextOrderId,
-            Customer = new CustomerDTO
+            Customer = new CustomerDTO_PRINT
             {
                 CustomerId = customerExists.CustomerId,
                 CustomerUsername = customerExists.CustomerUsername,
@@ -225,7 +236,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
                     CategoryDescription = c.Category.CategoryDescription
                 }
             })
-            .OrderBy(c => c.ProductId)],
+            .OrderBy(c => c.ProductName)],
             OrderStatus = customerOrder.OrderStatus,
             CreatedAt = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")
         };

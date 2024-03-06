@@ -10,6 +10,7 @@ public class MyDbContext(DbContextOptions<MyDbContext> options) : DbContext(opti
     public DbSet<Category> Categories { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<CustomerOrder> CustomerOrders { get; set; }
+    public DbSet<Admin> Admins { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -60,6 +61,18 @@ public class MyDbContext(DbContextOptions<MyDbContext> options) : DbContext(opti
             order.Property(e => e.CreatedAt)
                 .HasColumnType("DATETIME")
                 .HasDefaultValueSql("CURRENT_TIMESTAMP");
+        });
+
+        modelBuilder.Entity<Admin>(admin =>
+        {
+            // Configure CreatedAt to use the current timestamp on insert
+            admin.Property(e => e.CreatedAt)
+                .HasColumnType("DATETIME")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+            // Configure Username to be unique
+            admin.HasIndex(e => e.Username)
+                .IsUnique();
         });
     }
 }

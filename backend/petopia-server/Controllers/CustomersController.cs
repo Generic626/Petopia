@@ -1,21 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using petopia_server;
 using petopia_server.Models;
+using petopia_server.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 [Route("api/[controller]")]
 [ApiController]
-public partial class CustomersController(MyDbContext context) : ControllerBase
+public partial class CustomersController(MyDbContext context, TokenService tokenService) : ControllerBase
 {
     private readonly MyDbContext _context = context;
+    private readonly TokenService _tokenService = tokenService;
 
     // GET: api/Customers/All
-    // [HttpGet("All")]
-    public async Task<ActionResult<IEnumerable<CustomerDTO>>> GetCustomers()
+    [HttpGet("All")][Authorize(Roles = "Admin")]
+    public async Task<ActionResult<IEnumerable<CustomerDTO_PRINT>>> GetCustomers()
     {
         return await _context.Customers
-            .Select(c => new CustomerDTO
+            .Select(c => new CustomerDTO_PRINT
             {
                 CustomerId = c.CustomerId,
                 CustomerUsername = c.CustomerUsername,
@@ -23,16 +27,16 @@ public partial class CustomersController(MyDbContext context) : ControllerBase
                 CustomerAddress = c.CustomerAddress,
                 CreatedAt = c.CreatedAt
             })
-            .OrderBy(c => c.CustomerId)
+            .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
     }
 
     // GET: api/Customers/{id}
-    // [HttpGet("{id}")]
-    public async Task<ActionResult<CustomerDTO>> GetCustomer(Guid id)
+    [HttpGet("{id}")][Authorize(Roles = "Admin")]
+    public async Task<ActionResult<CustomerDTO_PRINT>> GetCustomer(Guid id)
     {
         var Customer = await _context.Customers
-            .Select(c => new CustomerDTO
+            .Select(c => new CustomerDTO_PRINT
             {
                 CustomerId = c.CustomerId,
                 CustomerUsername = c.CustomerUsername,
@@ -115,7 +119,8 @@ public partial class CustomersController(MyDbContext context) : ControllerBase
             CustomerUsername = customer.CustomerUsername,
             CustomerContact = customer.CustomerContact,
             CustomerAddress = customer.CustomerAddress,
-            CreatedAt = customer.CreatedAt
+            CreatedAt = customer.CreatedAt,
+            Token = _tokenService.GenerateJwtToken(customer)
         };
 
         return CreatedAtAction("GetCustomer", new { id = customerDTO.CustomerId }, customerDTO);
@@ -150,43 +155,39 @@ public partial class CustomersController(MyDbContext context) : ControllerBase
             CustomerUsername = customer.CustomerUsername,
             CustomerContact = customer.CustomerContact,
             CustomerAddress = customer.CustomerAddress,
-            CreatedAt = customer.CreatedAt
+            CreatedAt = customer.CreatedAt,
+            Token = _tokenService.GenerateJwtToken(customer)
         };
 
         return customerDTO;
     }
 
     // POST: api/Customers/Modify
-    [HttpPost("Modify")]
-    public async Task<ActionResult<CustomerDTO>> ChangePassword(CustomerDTO_MODIFY Customer)
+    [HttpPost("Modify")][Authorize(Roles = "Customer")]
+    public async Task<ActionResult<CustomerDTO_PRINT>> ChangePassword(CustomerDTO_MODIFY Customer)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
+
         var customer = await _context.Customers
-            .Where(c => c.CustomerUsername == Customer.CustomerUsername)
+            .Where(c => c.CustomerId == Guid.Parse(userId.Value))
             .FirstOrDefaultAsync();
 
         if (customer == null)
         {
-            return NotFound();
-        }
-
-        if (!customer.VerifyPassword(Customer.CustomerPassword))
-        {
-            return BadRequest(new { message = "Invalid password" });
+            return Unauthorized();
         }
 
         if (Customer.NewPassword != null && Customer.NewPassword.Length != 0)
         { 
-            // New password checking
-            if (Customer.NewPassword == Customer.CustomerPassword)
-            {
-                return BadRequest(new { message = "New password must be different from the old password" });
-            }
-            
             switch (Customer.NewPassword)
             {
                 // New password must be at least 8 characters
@@ -208,8 +209,8 @@ public partial class CustomersController(MyDbContext context) : ControllerBase
             CustomerId = customer.CustomerId,
             CustomerUsername = customer.CustomerUsername,
             CustomerPassword = customer.CustomerPassword,
-            CustomerContact = Customer.CustomerContact ?? customer.CustomerContact,
-            CustomerAddress = Customer.CustomerAddress ?? customer.CustomerAddress,
+            CustomerContact = Customer.NewContact ?? customer.CustomerContact,
+            CustomerAddress = Customer.NewAddress ?? customer.CustomerAddress,
             CreatedAt = customer.CreatedAt
         };
 
@@ -223,7 +224,7 @@ public partial class CustomersController(MyDbContext context) : ControllerBase
             return BadRequest(new { message = "Error modifying customer details" });
         }
 
-        CustomerDTO customerDTO = new()
+        CustomerDTO_PRINT customerDTO = new()
         {
             CustomerId = customerModified.CustomerId,
             CustomerUsername = customerModified.CustomerUsername,

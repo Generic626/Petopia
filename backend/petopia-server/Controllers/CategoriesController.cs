@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using petopia_server;
 using petopia_server.Models;
-using petopia_server.Helper;
+using petopia_server.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -32,10 +33,10 @@ public class CategoriesController(MyDbContext context, UrlHelper urlHelper) : Co
                     ProductKeywords = p.ProductKeywords,
                     ProductImage = _urlHelper.GetImageFullPath(p.ProductImage)
                 })
-                .OrderBy(p => p.ProductId)
+                .OrderBy(p => p.ProductName)
                 .ToList()
             })
-            .OrderBy(c => c.CategoryId)
+            .OrderBy(c => c.CategoryName)
             .ToListAsync();
     }
 
@@ -60,7 +61,7 @@ public class CategoriesController(MyDbContext context, UrlHelper urlHelper) : Co
                     ProductKeywords = p.ProductKeywords,
                     ProductImage = _urlHelper.GetImageFullPath(p.ProductImage)
                 })
-                .OrderBy(p => p.ProductId)
+                .OrderBy(p => p.ProductName)
                 .ToList()
             })
             .FirstOrDefaultAsync(c => c.CategoryId == id);
@@ -74,7 +75,7 @@ public class CategoriesController(MyDbContext context, UrlHelper urlHelper) : Co
     }
 
     // POST: api/Categories/Create
-    [HttpPost("Create")]
+    [HttpPost("Create")][Authorize(Roles = "Admin")]
     public async Task<ActionResult<CategoryDTO>> PostCategory(Category Category)
     {
         if (!ModelState.IsValid)

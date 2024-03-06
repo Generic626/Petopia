@@ -22,7 +22,7 @@ namespace petopia_server.Models
     public class CustomerOrderDTO_ORDER
     {
         public required string OrderId { get; set; }
-        public CustomerDTO? Customer { get; set; }
+        public CustomerDTO_PRINT? Customer { get; set; }
         public ICollection<ProductDTO_ORDER>? Products { get; set; }
         public string? OrderStatus { get; set; }
         public string? CreatedAt { get; set; }
@@ -38,7 +38,6 @@ namespace petopia_server.Models
 
     public class CustomerOrderDTO_CREATE
     {
-        public required Guid CustomerId { get; set; }
         public required ICollection<ProductDTO_CREATE_ORDER> Products { get; set; }
         public string? OrderStatus { get; set; }
     }

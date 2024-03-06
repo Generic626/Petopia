@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using petopia_server;
 using petopia_server.Models;
-using petopia_server.Helper;
+using petopia_server.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -33,7 +34,7 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
                     CategoryDescription = p.Category.CategoryDescription
                 }
             })
-            .OrderBy(p => p.ProductId)
+            .OrderBy(p => p.ProductName)
             .ToListAsync();
     }
 
@@ -70,7 +71,7 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
     }
 
     // POST: api/Products/Create
-    [HttpPost("Create")]
+    [HttpPost("Create")][Authorize(Roles = "Admin")]
     public async Task<ActionResult<ProductDTO>> CreateProduct([FromForm] ProductDTO_FORM_CREATE Product)
     {
         if (!ModelState.IsValid)
@@ -147,5 +148,21 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
         };
 
         return CreatedAtAction("GetProduct", new { id = productDTO.ProductId }, productDTO);
+    }
+
+    // POST: api/Products/Remove/{id}
+    [HttpPost("Remove/{id}")][Authorize(Roles = "Admin")]
+    public async Task<ActionResult<ProductDTO>> RemoveProduct(Guid id)
+    {
+        var product = await _context.Products.FindAsync(id);
+        if (product == null)
+        {
+            return NotFound();
+        }
+
+        _context.Products.Remove(product);
+        await _context.SaveChangesAsync();
+
+        return NoContent(); // 204 No Content
     }
 }

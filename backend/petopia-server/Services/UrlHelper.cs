@@ -1,4 +1,4 @@
-namespace petopia_server.Helper;
+namespace petopia_server.Services;
 public class UrlHelper(IHttpContextAccessor httpContextAccessor)
 {
     private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
