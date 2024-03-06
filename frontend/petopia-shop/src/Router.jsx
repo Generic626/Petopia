@@ -6,6 +6,7 @@ import ProductPage from "./pages/ProductPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import UserCartPage from "./pages/UserCartPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import UploadPage from "./pages/UploadPage";
 
 const Router = () => {
   return (
@@ -17,6 +18,8 @@ const Router = () => {
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/User-Cart" element={<UserCartPage />} />
       <Route path="/ProductDetail" element={<ProductDetailPage />} />
+      <Route path="/upload" element={<UploadPage />} />
+
       <Route path="/test" element={<CheckoutPage />} />
     </Routes>
   );
