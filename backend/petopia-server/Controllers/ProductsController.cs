@@ -25,6 +25,7 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
                 ProductQuantity = p.ProductQuantity,
                 ProductKeywords = p.ProductKeywords,
                 ProductImage = _urlHelper.GetImageFullPath(p.ProductImage),
+                CreatedAt = p.CreatedAt,
                 Category = p.Category == null ? null : new CategoryDTONoProducts
                 {
                     CategoryId = p.Category.CategoryId,
@@ -38,7 +39,7 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
 
     // GET: api/Products/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult<ProductDTO>> GetProduct(int id)
+    public async Task<ActionResult<ProductDTO>> GetProduct(Guid id)
     {
         var Product = await _context.Products
             .Select(p => new ProductDTO
@@ -50,6 +51,7 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
                 ProductQuantity = p.ProductQuantity,
                 ProductKeywords = p.ProductKeywords,
                 ProductImage = _urlHelper.GetImageFullPath(p.ProductImage),
+                CreatedAt = p.CreatedAt,
                 Category = p.Category == null ? null : new CategoryDTONoProducts
                 {
                     CategoryId = p.Category.CategoryId,
@@ -135,6 +137,7 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
             ProductQuantity = product.ProductQuantity,
             ProductKeywords = product.ProductKeywords,
             ProductImage = _urlHelper.GetImageFullPath(product.ProductImage),
+            CreatedAt = product.CreatedAt,
             Category = product.Category == null ? null : new CategoryDTONoProducts
             {
                 CategoryId = product.Category.CategoryId,

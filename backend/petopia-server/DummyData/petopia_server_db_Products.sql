@@ -21,7 +21,7 @@
 
 LOCK TABLES `Products` WRITE;
 /*!40000 ALTER TABLE `Products` DISABLE KEYS */;
-INSERT INTO `Products` VALUES (1,'MeatD','Meat for feeding dogs',32.50,12,'Dog, Food, Meat', 'product_1.webp',1),(2,'VegiC','Vegetable for feeding cats',12.50,36,'Cat, Food, Vegetable', 'product_2.webp',2);
+INSERT INTO `Products` VALUES ('2b65330e-ac27-45a7-9a48-fb59deb09718','Dog Food Number 1','The best dog food in the world.',12.99,60,'dog, food, green','b721be86-4a14-4c36-9a2d-7cba52047160.webp','0384a9ef-d108-477b-ad48-b944537a9ff5','2024-03-06 18:18:11');
 /*!40000 ALTER TABLE `Products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-27 17:23:08
+-- Dump completed on 2024-03-06 18:34:04

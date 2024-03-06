@@ -1,12 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace petopia_server.Models
 {
     public class Customer
     {
-        [Key]
-        public int CustomerId { get; set; }
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public Guid CustomerId { get; set; } = Guid.NewGuid();
         [StringLength(255)]
         public required string CustomerUsername { get; set; }
         [StringLength(255)]
@@ -33,7 +34,7 @@ namespace petopia_server.Models
 
     public class CustomerDTO
     {
-        public int CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
         public required string CustomerUsername { get; set; }
         public string? CustomerContact { get; set; }
         public string? CustomerAddress { get; set; }
@@ -42,7 +43,7 @@ namespace petopia_server.Models
 
     public class CustomerDTO_MODIFY
     {
-        public int CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
         public required string CustomerUsername { get; set; }
         public required string CustomerPassword { get; set; }
         public string? CustomerContact { get; set; }

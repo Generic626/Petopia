@@ -17,6 +17,11 @@ public class MyDbContext(DbContextOptions<MyDbContext> options) : DbContext(opti
 
         modelBuilder.Entity<Product>(product =>
         {
+            // Configure CreatedAt to use the current timestamp on insert
+            product.Property(e => e.CreatedAt)
+                .HasColumnType("DATETIME")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
             // Configure ProductName to be unique
             product.HasIndex(e => e.ProductName)
                 .IsUnique();
@@ -24,6 +29,11 @@ public class MyDbContext(DbContextOptions<MyDbContext> options) : DbContext(opti
 
         modelBuilder.Entity<Category>(category => 
         {
+            // Configure CreatedAt to use the current timestamp on insert
+            category.Property(e => e.CreatedAt)
+                .HasColumnType("DATETIME")
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
             // Configure CategoryName to be unique
             category.HasIndex(e => e.CategoryName)
                 .IsUnique();
@@ -45,6 +55,7 @@ public class MyDbContext(DbContextOptions<MyDbContext> options) : DbContext(opti
         {
             // Configure composite key
             order.HasKey(e => new { e.OrderId, e.CustomerId, e.ProductId });
+            
             // Configure CreatedAt to use the current timestamp on insert
             order.Property(e => e.CreatedAt)
                 .HasColumnType("DATETIME")

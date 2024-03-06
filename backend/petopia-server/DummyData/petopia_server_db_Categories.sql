@@ -21,7 +21,7 @@
 
 LOCK TABLES `Categories` WRITE;
 /*!40000 ALTER TABLE `Categories` DISABLE KEYS */;
-INSERT INTO `Categories` VALUES (1,'Dogs','Anything related to dogs.'),(2,'Cats','Anything related to cats.');
+INSERT INTO `Categories` VALUES ('0384a9ef-d108-477b-ad48-b944537a9ff5','Dog','Anything related to dogs.','2024-03-06 18:13:43'),('3f02a7c7-226b-46db-b286-9f008120ed1e','Cat','Anything related to cats.','2024-03-06 18:13:51');
 /*!40000 ALTER TABLE `Categories` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-27 17:23:08
+-- Dump completed on 2024-03-06 18:34:05
