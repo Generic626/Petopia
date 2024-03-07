@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CheckoutSuccess from "../components/CheckoutSuccess";
 import NavbarLayout from "../layout/NavbarLayout";
-import { TextField, Button } from "@mui/material";
+import { TextField, Alert } from "@mui/material";
 import { MuiFileInput } from 'mui-file-input'
 import { NavLink } from "react-router-dom";
 import axios from "axios";
@@ -23,6 +23,7 @@ const UploadPage = () => {
     const [productImage, setProductImage] = useState(null);
     const [productCategory, setProductCategory] = useState('');
     const [errors, setErrors] = useState({});
+    const [postError, setPostError] = useState("");
 
     const formValidation = () => {
         let errors = {};
@@ -60,22 +61,36 @@ const UploadPage = () => {
         formData.append('productImage', productImage);
         formData.append('categoryId', productCategory);
         axios
-            .post('http://localhost:5290/api/Products/Create', formData, {
+            .post('http://localhost:5290/api/products/create', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    // Hardcoded admin token for testing, valid until 2025, should be replaced after testing
+                    'Authorization': 'Bearer ' + (localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluXzEyMyIsIm5hbWVpZCI6ImI2YmFkZTgyLTdiZDctNDZiYS1iZTc4LTFlZThhOTMyM2VkMyIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTcwOTgyNDE5NCwiZXhwIjoxNzQxMzYwMTk0LCJpYXQiOjE3MDk4MjQxOTQsImlzcyI6InBldG9waWEiLCJhdWQiOiJwZXRvcGlhIn0.Kob1n-Ecep-Y7xUPiv9bVZGhd2I5sB1_qx9UJq9ppa8'),
                 },
             })
             .then((response) => {
-                console.log(response);
                 setIsSuccess(true);
             })
             .catch((error) => {
-                console.log(error);
+                if (error.response && error.response.data && error.response.data.message) { // server custom error message
+                    setPostError(error.response.data.message);
+                } else if (error.response && error.response.data && error.response.data.errors) { // server default error message
+                    if (error.response.data.errors.constructor === Object && Object.keys(error.response.data.errors).length > 0) {
+                        setPostError(Object.values(error.response.data.errors).join(", "));
+                    } else {
+                        setPostError("An error occurred while uploading the product");
+                    }
+                } else if (error.message) { // axios error message
+                    setPostError(error.message);
+                } else {
+                    setPostError("An error occurred while uploading the product");
+                }
             });
     };
 
     return (
         <NavbarLayout>
+            {postError && <Alert severity="error" onClose={() => setPostError("")}>{postError}</Alert>}
             <div className=" m-auto h-screen w-[500px] p-5 justify-center flex flex-col">
                 <div className="text-left ">
                     <h1 className="text-[30px] font-semibold mb-4 ">Upload Product</h1>
