@@ -86,7 +86,7 @@ public class CategoriesController(MyDbContext context, UrlHelper urlHelper) : Co
         Category category = new()
         {
             CategoryName = Category.CategoryName,
-            CategoryDescription = Category.CategoryDescription ?? ""
+            CategoryDescription = Category.CategoryDescription
         };
 
         var existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.CategoryName == category.CategoryName);

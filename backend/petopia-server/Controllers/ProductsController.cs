@@ -98,12 +98,12 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
         Product product = new()
         {
             ProductName = Product.ProductName,
-            ProductDescription = Product.ProductDescription ?? "",
-            ProductPrice = Product.ProductPrice ?? null,
-            ProductQuantity = Product.ProductQuantity ?? null,
-            ProductKeywords = Product.ProductKeywords ?? "",
+            ProductDescription = Product.ProductDescription,
+            ProductPrice = Product.ProductPrice,
+            ProductQuantity = Product.ProductQuantity,
+            ProductKeywords = Product.ProductKeywords,
             ProductImage = imageName == "" ? null : imageName,
-            CategoryId = Product.CategoryId ?? null
+            CategoryId = Product.CategoryId
         };
 
         if (product.CategoryId != null) {

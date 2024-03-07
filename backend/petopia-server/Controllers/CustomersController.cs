@@ -92,8 +92,8 @@ public partial class CustomersController(MyDbContext context, TokenService token
         {
             CustomerUsername = Customer.CustomerUsername,
             CustomerPassword = Customer.HashPassword(Customer.CustomerPassword),
-            CustomerContact = Customer.CustomerContact ?? "",
-            CustomerAddress = Customer.CustomerAddress ?? ""
+            CustomerContact = Customer.CustomerContact,
+            CustomerAddress = Customer.CustomerAddress
         };
 
         // Check if username already exists
