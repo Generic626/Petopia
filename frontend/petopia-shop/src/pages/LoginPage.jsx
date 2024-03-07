@@ -79,7 +79,7 @@ const LoginPage = () => {
             Head Back to Home
           </NavLink>
           {/* Don't have account link */}
-          <div className="w-full mt-2 flex flex-col">
+          <div className="w-full mt-2 flex justify-between">
             <TipLink path="/sign-up" text="Don&#39;t have an account?" />
             <TipLink path="/admin" text="Admin Login" />
           </div>

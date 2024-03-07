@@ -1,12 +1,11 @@
 import React from "react";
 import { AiFillDelete } from "react-icons/ai";
+import TrashButton from "./UI/TrashButton";
 
 const CheckoutProduct = (props) => {
   return (
     <div className="flex flex-row m-auto p-5 place-content-evenly items-center ">
-      <div className="cursor-pointer  hover:bg-primary rounded-full p-2 group duration-100 ease-linear">
-        <AiFillDelete className="text-primary group-hover:text-white" />
-      </div>
+      <TrashButton />
       <img
         src={props.src}
         alt={props.alt}

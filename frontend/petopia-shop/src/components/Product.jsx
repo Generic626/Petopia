@@ -1,10 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 const Product = (props) => {
+  const navigate = useNavigate();
+
+  const handleOnClick = () => {
+    navigate("/product-detail");
+  };
   const product = props.product;
   return (
-    <div className="w-1/4 flex flex-col items-center ">
-      <div className="hover:border-primary border-[2px] border-transparent rounded-lg flex flex-col items-center cursor-pointer p-2">
+    <div
+      className="w-1/4 flex flex-col items-center cursor-pointer"
+      onClick={handleOnClick}
+    >
+      <div className="duration-100 ease-linear hover:border-primary border-[2px] border-transparent rounded-lg flex flex-col items-center p-2">
         {/* Product Image */}
         <img
           src={product.productImage}

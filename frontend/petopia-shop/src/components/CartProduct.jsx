@@ -1,8 +1,10 @@
 import React from "react";
+import TrashButton from "./UI/TrashButton";
 
 const CartProduct = (props) => {
   return (
     <div className="flex flex-row m-auto p-5 justify-between items-center">
+      <TrashButton />
       <div className="flex items-center">
         <img
           src={props.src}

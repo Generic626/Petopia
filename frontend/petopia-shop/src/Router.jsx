@@ -16,15 +16,12 @@ const Router = () => {
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/admin" element={<AdminLoginPage />} />
-
       <Route path="/sign-up" element={<SignUpPage />} />
       <Route path="/product/:category" element={<ProductPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/user-cart" element={<UserCartPage />} />
       <Route path="/product-detail" element={<ProductDetailPage />} />
       <Route path="/upload" element={<UploadPage />} />
-
-      <Route path="/test" element={<CheckoutPage />} />
     </Routes>
   );
 };
