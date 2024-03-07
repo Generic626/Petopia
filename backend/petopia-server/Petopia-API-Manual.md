@@ -6,36 +6,36 @@ The base URL for the API is ```http://localhost:5290```.
 ## Table of Contents <!-- omit in toc -->
 
 - [Customers](#customers)
-  - [🟡 Register a new customer:](#🟡-register-a-new-customer)
-  - [🟡 Login as a customer:](#🟡-login-as-a-customer)
-  - [🟡 Modify customer details: ```Customer```](#🟡-modify-customer-details-customer)
-  - [🟢 Get all customers: ```Admin```](#🟢-get-all-customers-admin)
-  - [🟢 Get customer by id: ```Admin```](#🟢-get-customer-by-id-admin)
+  - [🟡 Register a new customer:](#register-a-new-customer)
+  - [🟡 Login as a customer:](#login-as-a-customer)
+  - [🟡 Modify customer details: ```Customer```](#modify-customer-details-customer)
+  - [🟢 Get all customers: ```Admin```](#get-all-customers-admin)
+  - [🟢 Get customer by id: ```Admin```](#get-customer-by-id-admin)
 - [Categories](#categories)
-  - [🟡 Create a new category: ```Admin```](#🟡-create-a-new-category-admin)
-  - [🟢 Get all categories:](#🟢-get-all-categories)
-  - [🟢 Get category by id:](#🟢-get-category-by-id)
+  - [🟡 Create a new category: ```Admin```](#create-a-new-category-admin)
+  - [🟢 Get all categories:](#get-all-categories)
+  - [🟢 Get category by id:](#get-category-by-id)
 - [Products](#products)
-  - [🟡 Create a new product: ```Admin``` ```Form-Data```](#🟡-create-a-new-product-admin-form-data)
-  - [🟡 Remove a product: ```Admin```](#🟡-remove-a-product-admin)
-  - [🟢 Get all products:](#🟢-get-all-products)
-  - [🟢 Get product by id:](#🟢-get-product-by-id)
+  - [🟡 Create a new product: ```Admin``` ```Form-Data```](#create-a-new-product-admin-form-data)
+  - [🟡 Remove a product: ```Admin```](#remove-a-product-admin)
+  - [🟢 Get all products:](#get-all-products)
+  - [🟢 Get product by id:](#get-product-by-id)
 - [Customer Orders](#customer-orders)
-  - [🟡 Create a new order: ```Customer```](#🟡-create-a-new-order-customer)
-  - [🟢 Get order by id:](#🟢-get-order-by-id)
-  - [🟢 Get all orders by customer id:](#🟢-get-all-orders-by-customer-id)
+  - [🟡 Create a new order: ```Customer```](#create-a-new-order-customer)
+  - [🟢 Get order by id:](#get-order-by-id)
+  - [🟢 Get all orders by customer id:](#get-all-orders-by-customer-id)
 - [Admins](#admins)
-  - [🟡 Register a new admin:](#🟡-register-a-new-admin)
-  - [🟡 Login as an admin:](#🟡-login-as-an-admin)
-  - [🟢 Get all admins: ```Admin```](#🟢-get-all-admins-admin)
-  - [🟢 Get admin by id: ```Admin```](#🟢-get-admin-by-id-admin)
+  - [🟡 Register a new admin:](#register-a-new-admin)
+  - [🟡 Login as an admin:](#login-as-an-admin)
+  - [🟢 Get all admins: ```Admin```](#get-all-admins-admin)
+  - [🟢 Get admin by id: ```Admin```](#get-admin-by-id-admin)
 - [Server Response Status](#server-response-status)
-  - [🟩 200 OK, 201 Created, 204 No Content](#🟩-200-ok-201-created-204-no-content)
-  - [🟥 400 Bad Request](#🟥-400-bad-request)
-  - [🟥 401 Unauthorized](#🟥-401-unauthorized)
-  - [🟥 403 Forbidden](#🟥-403-forbidden)
-  - [🟥 404 Not Found](#🟥-404-not-found)
-  - [🟥 500 Internal Server Error](#🟥-500-internal-server-error)
+  - [🟩 200 OK, 201 Created, 204 No Content](#200-ok-201-created-204-no-content)
+  - [🟥 400 Bad Request](#400-bad-request)
+  - [🟥 401 Unauthorized](#401-unauthorized)
+  - [🟥 403 Forbidden](#403-forbidden)
+  - [🟥 404 Not Found](#404-not-found)
+  - [🟥 500 Internal Server Error](#500-internal-server-error)
 
 > &nbsp;
 > <br>🟢 - GET Request
@@ -49,9 +49,9 @@ The base URL for the API is ```http://localhost:5290```.
 
 ## Customers
 
-### 🟡 Register a new customer:
+### Register a new customer:
 
-Request ```POST /api/customers/register```
+🟡 Request ```POST /api/customers/register```
 ```json
 {
     "customerUsername": "customer_a1",
@@ -61,7 +61,7 @@ Request ```POST /api/customers/register```
 }
 ```
 
-Response [```201 Created```](#🟩-200-ok-201-created-204-no-content) / [```400 Bad Request```](#🟥-400-bad-request)
+Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad Request```](#400-bad-request)
 ```json
 {
     "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
@@ -73,9 +73,9 @@ Response [```201 Created```](#🟩-200-ok-201-created-204-no-content) / [```400 
 }
 ```
 
-### 🟡 Login as a customer:
+### Login as a customer:
 
-Request ```POST /api/customers/login```
+🟡 Request ```POST /api/customers/login```
 
 ```json
 {
@@ -84,7 +84,7 @@ Request ```POST /api/customers/login```
 }
 ```
 
-Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```400 Bad Request```](#🟥-400-bad-request) / [```404 Not Found```](#🟥-404-not-found)
+Response [```200 OK```](#200-ok-201-created-204-no-content) / [```400 Bad Request```](#400-bad-request) / [```404 Not Found```](#404-not-found)
 ```json
 {
     "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
@@ -96,9 +96,9 @@ Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```400 Bad R
 }
 ```
 
-### 🟡 Modify customer details: ```Customer```
+### Modify customer details: ```Customer```
 
-Request ```POST /api/customers/modify```
+🟡 Request ```POST /api/customers/modify```
 ```json
 {
     "newContact": "12345678",
@@ -107,7 +107,7 @@ Request ```POST /api/customers/modify```
 }
 ```
 
-Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```400 Bad Request```](#🟥-400-bad-request) / [```401 Unauthorized```](#🟥-401-unauthorized) / [```403 Forbidden```](#🟥-403-forbidden) / [```404 Not Found (Extreme Case)```](#🟥-404-not-found)
+Response [```200 OK```](#200-ok-201-created-204-no-content) / [```400 Bad Request```](#400-bad-request) / [```401 Unauthorized```](#401-unauthorized) / [```403 Forbidden```](#403-forbidden) / [```404 Not Found (Extreme Case)```](#404-not-found)
 ```json
 {
     "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
@@ -118,11 +118,11 @@ Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```400 Bad R
 }
 ```
 
-### 🟢 Get all customers: ```Admin```
+### Get all customers: ```Admin```
 
-Request ```GET /api/customers/all```
+🟢 Request ```GET /api/customers/all```
 
-Response [```200 OK (Can be empty array if no customers exist)```](#🟩-200-ok-201-created-204-no-content) / [```401 Unauthorized```](#🟥-401-unauthorized) / [```403 Forbidden```](#🟥-403-forbidden)
+Response [```200 OK (Can be empty array if no customers exist)```](#200-ok-201-created-204-no-content) / [```401 Unauthorized```](#401-unauthorized) / [```403 Forbidden```](#403-forbidden)
 ```json
 [
     {
@@ -142,11 +142,11 @@ Response [```200 OK (Can be empty array if no customers exist)```](#🟩-200-ok-
 ]
 ```
 
-### 🟢 Get customer by id: ```Admin```
+### Get customer by id: ```Admin```
 
-Request ```GET /api/customers/{customerId}```
+🟢 Request ```GET /api/customers/{customerId}```
 
-Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```401 Unauthorized```](#🟥-401-unauthorized) / [```403 Forbidden```](#🟥-403-forbidden) / [```404 Not Found```](#🟥-404-not-found)
+Response [```200 OK```](#200-ok-201-created-204-no-content) / [```401 Unauthorized```](#401-unauthorized) / [```403 Forbidden```](#403-forbidden) / [```404 Not Found```](#404-not-found)
 ```json
 {
     "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
@@ -159,9 +159,9 @@ Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```401 Unaut
 
 ## Categories
 
-### 🟡 Create a new category: ```Admin```
+### Create a new category: ```Admin```
 
-Request ```POST /api/categories/create```
+🟡 Request ```POST /api/categories/create```
 ```json
 {
     "categoryName": "Dog",
@@ -169,7 +169,7 @@ Request ```POST /api/categories/create```
 }
 ```
 
-Response [```201 Created```](#🟩-200-ok-201-created-204-no-content) / [```400 Bad Request```](#🟥-400-bad-request) / [```401 Unauthorized```](#🟥-401-unauthorized) / [```403 Forbidden```](#🟥-403-forbidden)
+Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad Request```](#400-bad-request) / [```401 Unauthorized```](#401-unauthorized) / [```403 Forbidden```](#403-forbidden)
 ```json
 {
     "categoryId": "0384a9ef-d108-477b-ad48-b944537a9ff5",
@@ -180,11 +180,11 @@ Response [```201 Created```](#🟩-200-ok-201-created-204-no-content) / [```400 
 }
 ```
 
-### 🟢 Get all categories:
+### Get all categories:
 
-Request ```GET /api/categories/all```
+🟢 Request ```GET /api/categories/all```
 
-Response [```200 OK (Can be empty array if no categories exist)```](#🟩-200-ok-201-created-204-no-content)
+Response [```200 OK (Can be empty array if no categories exist)```](#200-ok-201-created-204-no-content)
 ```json
 [
     {
@@ -204,11 +204,11 @@ Response [```200 OK (Can be empty array if no categories exist)```](#🟩-200-ok
 ]
 ```
 
-### 🟢 Get category by id:
+### Get category by id:
 
-Request ```GET /api/categories/{categoryId}```
+🟢 Request ```GET /api/categories/{categoryId}```
 
-Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```404 Not Found```](#🟥-404-not-found)
+Response [```200 OK```](#200-ok-201-created-204-no-content) / [```404 Not Found```](#404-not-found)
 ```json
 {
     "categoryId": "0384a9ef-d108-477b-ad48-b944537a9ff5",
@@ -221,9 +221,9 @@ Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```404 Not F
 
 ## Products
 
-### 🟡 Create a new product: ```Admin``` ```Form-Data```
+### Create a new product: ```Admin``` ```Form-Data```
 
-Request ```POST /api/products/create```
+🟡 Request ```POST /api/products/create```
 ```json
 {
     "productName": "Dog Food Number 1",
@@ -236,7 +236,7 @@ Request ```POST /api/products/create```
 }
 ```
 
-Response [```201 Created```](#🟩-200-ok-201-created-204-no-content) / [```400 Bad Request```](#🟥-400-bad-request) / [```401 Unauthorized```](#🟥-401-unauthorized) / [```403 Forbidden```](#🟥-403-forbidden)
+Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad Request```](#400-bad-request) / [```401 Unauthorized```](#401-unauthorized) / [```403 Forbidden```](#403-forbidden)
 ```json
 {
     "productId": "2b65330e-ac27-45a7-9a48-fb59deb09718",
@@ -255,17 +255,17 @@ Response [```201 Created```](#🟩-200-ok-201-created-204-no-content) / [```400 
 }
 ```
 
-### 🟡 Remove a product: ```Admin```
+### Remove a product: ```Admin```
 
-Request ```POST /api/products/remove/{productId}```
+🟡 Request ```POST /api/products/remove/{productId}```
 
-Response ```204 No Content``` / [```401 Unauthorized```](#🟥-401-unauthorized) / [```403 Forbidden```](#🟥-403-forbidden) / [```404 Not Found```](#🟥-404-not-found)
+Response ```204 No Content``` / [```401 Unauthorized```](#401-unauthorized) / [```403 Forbidden```](#403-forbidden) / [```404 Not Found```](#404-not-found)
 
-### 🟢 Get all products:
+### Get all products:
 
-Request ```GET /api/products/all```
+🟢 Request ```GET /api/products/all```
 
-Response [```200 OK (Can be empty array if no products exist)```](#🟩-200-ok-201-created-204-no-content)
+Response [```200 OK (Can be empty array if no products exist)```](#200-ok-201-created-204-no-content)
 ```json
 [
     {
@@ -286,11 +286,11 @@ Response [```200 OK (Can be empty array if no products exist)```](#🟩-200-ok-2
 ]
 ```
 
-### 🟢 Get product by id:
+### Get product by id:
 
-Request ```GET /api/products/{productId}```
+🟢 Request ```GET /api/products/{productId}```
 
-Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```404 Not Found```](#🟥-404-not-found)
+Response [```200 OK```](#200-ok-201-created-204-no-content) / [```404 Not Found```](#404-not-found)
 ```json
 {
     "productId": "2b65330e-ac27-45a7-9a48-fb59deb09718",
@@ -311,9 +311,9 @@ Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```404 Not F
 
 ## Customer Orders
 
-### 🟡 Create a new order: ```Customer```
+### Create a new order: ```Customer```
 
-Request ```POST /api/customerorders/create```
+🟡 Request ```POST /api/customerorders/create```
 ```json
 {
     "products": [
@@ -326,7 +326,7 @@ Request ```POST /api/customerorders/create```
 }
 ```
 
-Response [```201 Created```](#🟩-200-ok-201-created-204-no-content) / [```400 Bad Request```](#🟥-400-bad-request) / [```401 Unauthorized```](#🟥-401-unauthorized) / [```403 Forbidden```](#🟥-403-forbidden)
+Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad Request```](#400-bad-request) / [```401 Unauthorized```](#401-unauthorized) / [```403 Forbidden```](#403-forbidden)
 ```json
 {
     "orderId": "377603c920240307000913",
@@ -358,11 +358,11 @@ Response [```201 Created```](#🟩-200-ok-201-created-204-no-content) / [```400 
 }
 ```
 
-### 🟢 Get order by id:
+### Get order by id:
 
-Request ```GET /api/customerorders/order/{orderId}```
+🟢 Request ```GET /api/customerorders/order/{orderId}```
 
-Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```404 Not Found```](#🟥-404-not-found)
+Response [```200 OK```](#200-ok-201-created-204-no-content) / [```404 Not Found```](#404-not-found)
 ```json
 {
     "orderId": "377603c920240307000913",
@@ -394,11 +394,11 @@ Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```404 Not F
 }
 ```
 
-### 🟢 Get all orders by customer id:
+### Get all orders by customer id:
 
-Request ```GET /api/customerorders/customer/{customerId}```
+🟢 Request ```GET /api/customerorders/customer/{customerId}```
 
-Response [```200 OK (Can be empty array if no orders exist)```](#🟩-200-ok-201-created-204-no-content)
+Response [```200 OK (Can be empty array if no orders exist)```](#200-ok-201-created-204-no-content)
 ```json
 [
     {
@@ -427,9 +427,9 @@ Response [```200 OK (Can be empty array if no orders exist)```](#🟩-200-ok-201
 
 ## Admins
 
-### 🟡 Register a new admin:
+### Register a new admin:
 
-Request ```POST /api/admins/register```
+🟡 Request ```POST /api/admins/register```
 ```json
 {
     "username": "admin_123",
@@ -437,7 +437,7 @@ Request ```POST /api/admins/register```
 }
 ```
 
-Response [```201 Created```](#🟩-200-ok-201-created-204-no-content) / [```400 Bad Request```](#🟥-400-bad-request)
+Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad Request```](#400-bad-request)
 ```json
 {
     "id": "838072d3-d9b7-4123-9bbc-bfe35d44794c",
@@ -447,9 +447,9 @@ Response [```201 Created```](#🟩-200-ok-201-created-204-no-content) / [```400 
 }
 ```
 
-### 🟡 Login as an admin:
+### Login as an admin:
 
-Request ```POST /api/admins/login```
+🟡 Request ```POST /api/admins/login```
 
 ```json
 {
@@ -458,7 +458,7 @@ Request ```POST /api/admins/login```
 }
 ```
 
-Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```400 Bad Request```](#🟥-400-bad-request) / [```404 Not Found```](#🟥-404-not-found)
+Response [```200 OK```](#200-ok-201-created-204-no-content) / [```400 Bad Request```](#400-bad-request) / [```404 Not Found```](#404-not-found)
 ```json
 {
     "id": "838072d3-d9b7-4123-9bbc-bfe35d44794c",
@@ -468,11 +468,11 @@ Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```400 Bad R
 }
 ```
 
-### 🟢 Get all admins: ```Admin```
+### Get all admins: ```Admin```
 
-Request ```GET /api/admins/all```
+🟢 Request ```GET /api/admins/all```
 
-Response [```200 OK (Can be empty array if no admins exist)```](#🟩-200-ok-201-created-204-no-content) / [```401 Unauthorized```](#🟥-401-unauthorized) / [```403 Forbidden```](#🟥-403-forbidden)
+Response [```200 OK (Can be empty array if no admins exist)```](#200-ok-201-created-204-no-content) / [```401 Unauthorized```](#401-unauthorized) / [```403 Forbidden```](#403-forbidden)
 ```json
 [
     {
@@ -483,11 +483,11 @@ Response [```200 OK (Can be empty array if no admins exist)```](#🟩-200-ok-201
 ]
 ```
 
-### 🟢 Get admin by id: ```Admin```
+### Get admin by id: ```Admin```
 
-Request ```GET /api/admins/{adminId}```
+🟢 Request ```GET /api/admins/{adminId}```
 
-Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```401 Unauthorized```](#🟥-401-unauthorized) / [```403 Forbidden```](#🟥-403-forbidden) / [```404 Not Found```](#🟥-404-not-found)
+Response [```200 OK```](#200-ok-201-created-204-no-content) / [```401 Unauthorized```](#401-unauthorized) / [```403 Forbidden```](#403-forbidden) / [```404 Not Found```](#404-not-found)
 ```json
 {
     "id": "838072d3-d9b7-4123-9bbc-bfe35d44794c",
@@ -500,15 +500,15 @@ Response [```200 OK```](#🟩-200-ok-201-created-204-no-content) / [```401 Unaut
 
 The server will respond with the following status codes:
 
-### 🟩 200 OK, 201 Created, 204 No Content
+### 200 OK, 201 Created, 204 No Content
 
-The server will respond with a status code of 200 for successful GET requests, 201 for successful POST create requests, and 204 for successful POST delete requests.
+🟩 The server will respond with a status code of 200 for successful GET requests, 201 for successful POST create requests, and 204 for successful POST delete requests.
 
 > Note that sometimes the server will respond with an empty array, depending on the request.
 
-### 🟥 400 Bad Request
+### 400 Bad Request
 
-Used for general errors and properties errors
+🟥 Used for general errors and properties errors
 
 Type 1:
 
@@ -537,17 +537,17 @@ Type 2:
 }
 ```
 
-### 🟥 401 Unauthorized
+### 401 Unauthorized
 
-Used when the token cannot be verified
+🟥 Used when the token cannot be verified
 
-### 🟥 403 Forbidden
+### 403 Forbidden
 
-Used when the user does not have the required permissions
+🟥 Used when the user does not have the required permissions
 
-### 🟥 404 Not Found
+### 404 Not Found
 
-.NET framework's default response, used when a single record is not found, or when the path doesn't exist:
+🟥 .NET framework's default response, used when a single record is not found, or when the path doesn't exist:
 
 ```json
 {
@@ -558,6 +558,6 @@ Used when the user does not have the required permissions
 }
 ```
 
-### 🟥 500 Internal Server Error
+### 500 Internal Server Error
 
-Used when the server encounters an error
+🟥 Used when the server encounters an error
