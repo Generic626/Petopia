@@ -54,8 +54,8 @@ The base URL for the API is ```http://localhost:5290```.
 🟡 Request ```POST /api/customers/register```
 ```json
 {
-    "customerUsername": "customer_a1",
-    "customerPassword": "customer_a1",
+    "customerUsername": "customer_a1", // required
+    "customerPassword": "customer_a1", // required
     "customerContact": "98765432",
     "customerAddress": "123, ABC Street, Singapore"
 }
@@ -79,8 +79,8 @@ Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad R
 
 ```json
 {
-    "customerUsername": "customer_a1",
-    "customerPassword": "customer_a1"
+    "customerUsername": "customer_a1", // required
+    "customerPassword": "customer_a1"  // required
 }
 ```
 
@@ -164,7 +164,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```401 Unauthoriz
 🟡 Request ```POST /api/categories/create```
 ```json
 {
-    "categoryName": "Dog",
+    "categoryName": "Dog", // required
     "categoryDescription": "Anything related to dogs."
 }
 ```
@@ -226,7 +226,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```404 Not Found`
 🟡 Request ```POST /api/products/create```
 ```json
 {
-    "productName": "Dog Food Number 1",
+    "productName": "Dog Food Number 1", // required
     "productDescription": "The best dog food in the world.",
     "productPrice": 12.99,
     "productQuantity": 60,
@@ -316,10 +316,10 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```404 Not Found`
 🟡 Request ```POST /api/customerorders/create```
 ```json
 {
-    "products": [
+    "products": [ // required at least 1 product
         {
-            "productId": "2b65330e-ac27-45a7-9a48-fb59deb09718",
-            "orderedQuantity": 2
+            "productId": "2b65330e-ac27-45a7-9a48-fb59deb09718", // required
+            "orderedQuantity": 2 // required
         }
     ],
     "orderStatus": "Processing"
@@ -432,8 +432,8 @@ Response [```200 OK (Can be empty array if no orders exist)```](#200-ok-201-crea
 🟡 Request ```POST /api/admins/register```
 ```json
 {
-    "username": "admin_123",
-    "password": "admin_123"
+    "username": "admin_123", // required
+    "password": "admin_123"  // required
 }
 ```
 
@@ -453,8 +453,8 @@ Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad R
 
 ```json
 {
-    "username": "admin_123",
-    "password": "admin_123"
+    "username": "admin_123", // required
+    "password": "admin_123"  // required
 }
 ```
 
