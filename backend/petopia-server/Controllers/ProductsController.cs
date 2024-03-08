@@ -26,7 +26,6 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
                 ProductQuantity = p.ProductQuantity,
                 ProductKeywords = p.ProductKeywords,
                 ProductImage = _urlHelper.GetImageFullPath(p.ProductImage),
-                CreatedAt = p.CreatedAt,
                 Category = p.Category == null ? null : new CategoryDTONoProducts
                 {
                     CategoryId = p.Category.CategoryId,
@@ -52,7 +51,6 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
                 ProductQuantity = p.ProductQuantity,
                 ProductKeywords = p.ProductKeywords,
                 ProductImage = _urlHelper.GetImageFullPath(p.ProductImage),
-                CreatedAt = p.CreatedAt,
                 Category = p.Category == null ? null : new CategoryDTONoProducts
                 {
                     CategoryId = p.Category.CategoryId,
@@ -138,7 +136,6 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
             ProductQuantity = product.ProductQuantity,
             ProductKeywords = product.ProductKeywords,
             ProductImage = _urlHelper.GetImageFullPath(product.ProductImage),
-            CreatedAt = product.CreatedAt,
             Category = product.Category == null ? null : new CategoryDTONoProducts
             {
                 CategoryId = product.Category.CategoryId,

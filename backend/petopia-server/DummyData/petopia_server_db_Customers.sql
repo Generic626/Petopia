@@ -21,7 +21,7 @@
 
 LOCK TABLES `Customers` WRITE;
 /*!40000 ALTER TABLE `Customers` DISABLE KEYS */;
-INSERT INTO `Customers` VALUES ('2cac11e3-d5eb-40c1-b174-b45f72dffb04','customer_a2','AQAAAAIAAYagAAAAEOxSkYclD+SDpuWr0tSLFYhcawk83w3R+/QNiWTxiaKdcu1mlltUqHDPZQCDMsfrqw==','','','2024-03-06 18:13:16'),('a16b2b16-b7bf-4fea-8948-91b8f24d1255','customer_a3','AQAAAAIAAYagAAAAELKB+gvc+egi/NSBsP5+/S6Q2IVjMBo3ltYEPy5nlLPsna3BSczgC4gtBQdBnmtiSQ==','','','2024-03-06 18:13:20'),('d7526763-54a5-45bf-aacc-93236098fadb','customer_a1','AQAAAAIAAYagAAAAEJMozUoqepvBkQ01ty5iACju4743MdgLoMYxm+b7DQnb/tMGAHnKIKiYGJsmaRRzfg==','','','2024-03-06 18:13:09');
+INSERT INTO `Customers` VALUES ('2cac11e3-d5eb-40c1-b174-b45f72dffb04','customer_a2','AQAAAAIAAYagAAAAEOxSkYclD+SDpuWr0tSLFYhcawk83w3R+/QNiWTxiaKdcu1mlltUqHDPZQCDMsfrqw==','','','2024-03-06 18:13:16', '2024-03-06 18:13:16', null),('a16b2b16-b7bf-4fea-8948-91b8f24d1255','customer_a3','AQAAAAIAAYagAAAAELKB+gvc+egi/NSBsP5+/S6Q2IVjMBo3ltYEPy5nlLPsna3BSczgC4gtBQdBnmtiSQ==','','','2024-03-06 18:13:20', '2024-03-06 18:13:20', null),('d7526763-54a5-45bf-aacc-93236098fadb','customer_a1','AQAAAAIAAYagAAAAEJMozUoqepvBkQ01ty5iACju4743MdgLoMYxm+b7DQnb/tMGAHnKIKiYGJsmaRRzfg==','','','2024-03-06 18:13:09', '2024-03-06 18:13:09', null);
 /*!40000 ALTER TABLE `Customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

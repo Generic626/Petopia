@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace petopia_server.Models
 {
-    public class Category
+    public class Category: BaseModel
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid CategoryId { get; set; } = Guid.NewGuid();
@@ -12,7 +12,6 @@ namespace petopia_server.Models
         [StringLength(255)]
         public string? CategoryDescription { get; set; }
         public ICollection<Product>? Products { get; set; }
-        public DateTime CreatedAt { get; set; } // Datetime is not supported by default in MySQL, make sure to config it in DbContext
     }
 
     public class CategoryDTO
@@ -21,7 +20,6 @@ namespace petopia_server.Models
         public required string CategoryName { get; set; }
         public string? CategoryDescription { get; set; }
         public ICollection<ProductDTONoCategory>? Products { get; set; }
-        public DateTime CreatedAt { get; set; }
     }
 
     public class CategoryDTONoProducts

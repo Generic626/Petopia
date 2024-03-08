@@ -68,7 +68,6 @@ Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad R
     "customerUsername": "customer_a1",
     "customerContact": "98765432",
     "customerAddress": "123, ABC Street, Singapore",
-    "createdAt": "2024-03-06T18:13:09",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImN1c3RvbWVyX2ExIiwibmFtZWlkIjoiZDc1MjY3NjMtNTRhNS00NWJmLWFhY2MtOTMyMzYwOThmYWRiIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzA5NzM5MDg5LCJleHAiOjE3MDk3NDI2ODksImlhdCI6MTcwOTczOTA4OSwiaXNzIjoicGV0b3BpYSIsImF1ZCI6InBldG9waWEifQ.LbCzSmecdrXwr74ksvjha8kFmf-c61ffpugmbYwDsc0"
 }
 ```
@@ -91,7 +90,6 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```400 Bad Reques
     "customerUsername": "customer_a1",
     "customerContact": "98765432",
     "customerAddress": "123, ABC Street, Singapore",
-    "createdAt": "2024-03-06T18:13:09",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImN1c3RvbWVyX2ExIiwibmFtZWlkIjoiZDc1MjY3NjMtNTRhNS00NWJmLWFhY2MtOTMyMzYwOThmYWRiIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzA5NzM5MDg5LCJleHAiOjE3MDk3NDI2ODksImlhdCI6MTcwOTczOTA4OSwiaXNzIjoicGV0b3BpYSIsImF1ZCI6InBldG9waWEifQ.LbCzSmecdrXwr74ksvjha8kFmf-c61ffpugmbYwDsc0"
 }
 ```
@@ -113,8 +111,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```400 Bad Reques
     "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
     "customerUsername": "customer_a1",
     "customerContact": "12345678",
-    "customerAddress": "PolyU, Hong Kong",
-    "createdAt": "2024-03-06T18:13:09"
+    "customerAddress": "PolyU, Hong Kong"
 }
 ```
 
@@ -128,16 +125,14 @@ Response [```200 OK (Can be empty array if no customers exist)```](#200-ok-201-c
     {
         "customerId": "2cac11e3-d5eb-40c1-b174-b45f72dffb04",
         "customerUsername": "customer_a2",
-        "customerContact": "",
-        "customerAddress": "",
-        "createdAt": "2024-03-06T18:13:16"
+        "customerContact": null,
+        "customerAddress": null
     },
     {
         "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
         "customerUsername": "customer_a1",
         "customerContact": "12345678",
-        "customerAddress": "PolyU, Hong Kong",
-        "createdAt": "2024-03-06T18:13:09"
+        "customerAddress": "PolyU, Hong Kong"
     }
 ]
 ```
@@ -152,8 +147,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```401 Unauthoriz
     "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
     "customerUsername": "customer_a1",
     "customerContact": "12345678",
-    "customerAddress": "PolyU, Hong Kong",
-    "createdAt": "2024-03-06T18:13:09"
+    "customerAddress": "PolyU, Hong Kong"
 }
 ```
 
@@ -175,8 +169,7 @@ Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad R
     "categoryId": "0384a9ef-d108-477b-ad48-b944537a9ff5",
     "categoryName": "Dog",
     "categoryDescription": "Anything related to dogs.",
-    "products": null,
-    "createdAt": "2024-03-06 18:13:43"
+    "products": null
 }
 ```
 
@@ -191,15 +184,13 @@ Response [```200 OK (Can be empty array if no categories exist)```](#200-ok-201-
         "categoryId": "3f02a7c7-226b-46db-b286-9f008120ed1e",
         "categoryName": "Cat",
         "categoryDescription": "Anything related to cats.",
-        "products": [],
-        "createdAt": "2024-03-06T18:13:51"
+        "products": []
     },
     {
         "categoryId": "0384a9ef-d108-477b-ad48-b944537a9ff5",
         "categoryName": "Dog",
         "categoryDescription": "Anything related to dogs.",
-        "products": [],
-        "createdAt": "2024-03-06T18:13:43"
+        "products": []
     }
 ]
 ```
@@ -214,8 +205,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```404 Not Found`
     "categoryId": "0384a9ef-d108-477b-ad48-b944537a9ff5",
     "categoryName": "Dog",
     "categoryDescription": "Anything related to dogs.",
-    "products": [],
-    "createdAt": "2024-03-06T18:13:43"
+    "products": []
 }
 ```
 
@@ -250,8 +240,7 @@ Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad R
         "categoryId": "0384a9ef-d108-477b-ad48-b944537a9ff5",
         "categoryName": "Dog",
         "categoryDescription": "Anything related to dogs."
-    },
-    "createdAt": "2024-03-06T18:18:11"
+    }
 }
 ```
 
@@ -280,8 +269,7 @@ Response [```200 OK (Can be empty array if no products exist)```](#200-ok-201-cr
             "categoryId": "0384a9ef-d108-477b-ad48-b944537a9ff5",
             "categoryName": "Dog",
             "categoryDescription": "Anything related to dogs."
-        },
-        "createdAt": "2024-03-06T18:18:11"
+        }
     }
 ]
 ```
@@ -304,8 +292,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```404 Not Found`
         "categoryId": "0384a9ef-d108-477b-ad48-b944537a9ff5",
         "categoryName": "Dog",
         "categoryDescription": "Anything related to dogs."
-    },
-    "createdAt": "2024-03-06T18:18:11"
+    }
 }
 ```
 
@@ -334,8 +321,7 @@ Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad R
         "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
         "customerUsername": "customer_a1",
         "customerContact": "12345678",
-        "customerAddress": "PolyU, Hong Kong",
-        "createdAt": "2024-03-06T18:13:09"
+        "customerAddress": "PolyU, Hong Kong"
     },
     "products": [
         {
@@ -370,8 +356,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```404 Not Found`
         "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
         "customerUsername": "customer_a1",
         "customerContact": "12345678",
-        "customerAddress": "PolyU, Hong Kong",
-        "createdAt": "2024-03-06T18:13:09"
+        "customerAddress": "PolyU, Hong Kong"
     },
     "products": [
         {
@@ -442,7 +427,6 @@ Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad R
 {
     "id": "838072d3-d9b7-4123-9bbc-bfe35d44794c",
     "username": "admin_123",
-    "createdAt": "2024-03-06T21:50:24",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluXzEyMyIsIm5hbWVpZCI6IjgzODA3MmQzLWQ5YjctNDEyMy05YmJjLWJmZTM1ZDQ0Nzk0YyIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTcwOTczMzAyNCwiZXhwIjoxNzA5NzM2NjI0LCJpYXQiOjE3MDk3MzMwMjQsImlzcyI6InBldG9waWEiLCJhdWQiOiJwZXRvcGlhIn0.s2R_3SkBSQtZ9VWyaxm_O6jHAiYuCWlR2YNmVzVhynM"
 }
 ```
@@ -463,7 +447,6 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```400 Bad Reques
 {
     "id": "838072d3-d9b7-4123-9bbc-bfe35d44794c",
     "username": "admin_123",
-    "createdAt": "2024-03-06T21:50:24",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluXzEyMyIsIm5hbWVpZCI6IjgzODA3MmQzLWQ5YjctNDEyMy05YmJjLWJmZTM1ZDQ0Nzk0YyIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTcwOTczMzAyNCwiZXhwIjoxNzA5NzM2NjI0LCJpYXQiOjE3MDk3MzMwMjQsImlzcyI6InBldG9waWEiLCJhdWQiOiJwZXRvcGlhIn0.s2R_3SkBSQtZ9VWyaxm_O6jHAiYuCWlR2YNmVzVhynM"
 }
 ```
@@ -477,8 +460,7 @@ Response [```200 OK (Can be empty array if no admins exist)```](#200-ok-201-crea
 [
     {
         "id": "838072d3-d9b7-4123-9bbc-bfe35d44794c",
-        "username": "admin_123",
-        "createdAt": "2024-03-06T21:50:24"
+        "username": "admin_123"
     }
 ]
 ```
@@ -491,8 +473,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```401 Unauthoriz
 ```json
 {
     "id": "838072d3-d9b7-4123-9bbc-bfe35d44794c",
-    "username": "admin_123",
-    "createdAt": "2024-03-06T21:50:24"
+    "username": "admin_123"
 }
 ```
 

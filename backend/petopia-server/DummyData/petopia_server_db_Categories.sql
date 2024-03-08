@@ -21,7 +21,7 @@
 
 LOCK TABLES `Categories` WRITE;
 /*!40000 ALTER TABLE `Categories` DISABLE KEYS */;
-INSERT INTO `Categories` VALUES ('0384a9ef-d108-477b-ad48-b944537a9ff5','Dog','Anything related to dogs.','2024-03-06 18:13:43'),('3f02a7c7-226b-46db-b286-9f008120ed1e','Cat','Anything related to cats.','2024-03-06 18:13:51');
+INSERT INTO `Categories` VALUES ('0384a9ef-d108-477b-ad48-b944537a9ff5','Dog','Anything related to dogs.','2024-03-06 18:13:43', '2024-03-06 18:13:43', null),('3f02a7c7-226b-46db-b286-9f008120ed1e','Cat','Anything related to cats.','2024-03-06 18:13:51', '2024-03-06 18:13:51', null);
 /*!40000 ALTER TABLE `Categories` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
