@@ -77,7 +77,7 @@ const UploadPage = () => {
                     newPostError.push(error.response.data.message);
                 } else if (error.response && error.response.data && error.response.data.errors) { // server default error message
                     if (error.response.data.errors.constructor === Object && Object.keys(error.response.data.errors).length > 0) {
-                        newPostError = Object.values(error.response.data.errors).map((error) => error[0]);
+                        newPostError = [...newPostError, ...Object.values(error.response.data.errors).map((error) => error[0])];
                     } else {
                         newPostError.push("An error occurred while uploading the product");
                     }
