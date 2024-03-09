@@ -25,15 +25,15 @@ namespace petopia_server.Models
 
     public class ProductDTO_FORM_CREATE
     {
-        [FromForm(Name = "productName")]
+        [StringLength(255)][FromForm(Name = "productName")]
         public required string ProductName { get; set; }
-        [FromForm(Name = "productDescription")]
+        [StringLength(255)][FromForm(Name = "productDescription")]
         public string? ProductDescription { get; set; }
         [FromForm(Name = "productPrice")]
         public decimal? ProductPrice { get; set; }
         [FromForm(Name = "productQuantity")]
         public int? ProductQuantity { get; set; }
-        [FromForm(Name = "productKeywords")]
+        [StringLength(255)][FromForm(Name = "productKeywords")]
         public string? ProductKeywords { get; set; }
         [FromForm(Name = "productImage")]
         public IFormFile? ProductImage { get; set; }

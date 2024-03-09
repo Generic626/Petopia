@@ -86,6 +86,13 @@ public partial class CustomersController(MyDbContext context, TokenService token
                 return BadRequest(new { message = "Password must contain at least one letter, one number, and one special character" });
         }
 
+        // Check if username already exists
+        var existingCustomer = await _context.Customers.FirstOrDefaultAsync(c => c.CustomerUsername == Customer.CustomerUsername);
+        if (existingCustomer != null)
+        {
+            return BadRequest(new { message = "Username already exists" });
+        }
+
         Customer customer = new()
         {
             CustomerUsername = Customer.CustomerUsername,
@@ -93,13 +100,6 @@ public partial class CustomersController(MyDbContext context, TokenService token
             CustomerContact = Customer.CustomerContact,
             CustomerAddress = Customer.CustomerAddress
         };
-
-        // Check if username already exists
-        var existingCustomer = await _context.Customers.FirstOrDefaultAsync(c => c.CustomerUsername == customer.CustomerUsername);
-        if (existingCustomer != null)
-        {
-            return BadRequest(new { message = "Username already exists" });
-        }
 
         try
         {

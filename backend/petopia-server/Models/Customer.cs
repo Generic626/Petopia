@@ -51,8 +51,11 @@ namespace petopia_server.Models
     public class CustomerDTO_MODIFY
     {
         public Guid CustomerId { get; set; }
+        [StringLength(255)]
         public string? NewContact { get; set; }
+        [StringLength(255)]
         public string? NewAddress { get; set; }
+        [StringLength(255)]
         public string? NewPassword { get; set; }
     }
 }

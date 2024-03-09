@@ -81,18 +81,18 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
                 return BadRequest(new { message = "Password must contain at least one letter, one number, and one special character" });
         }
 
+        // Check if username already exists
+        var existingAdmin = await _context.Admins.FirstOrDefaultAsync(a => a.Username == Admin.Username);
+        if (existingAdmin != null)
+        {
+            return BadRequest(new { message = "Username already exists" });
+        }
+
         Admin admin = new()
         {
             Username = Admin.Username,
             Password = Admin.HashPassword(Admin.Password)
         };
-
-        // Check if username already exists
-        var existingAdmin = await _context.Admins.FirstOrDefaultAsync(a => a.Username == admin.Username);
-        if (existingAdmin != null)
-        {
-            return BadRequest(new { message = "Username already exists" });
-        }
 
         try
         {

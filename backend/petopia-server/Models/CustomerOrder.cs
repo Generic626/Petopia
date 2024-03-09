@@ -38,6 +38,7 @@ namespace petopia_server.Models
     public class CustomerOrderDTO_CREATE
     {
         public required ICollection<ProductDTO_CREATE_ORDER> Products { get; set; }
+        [StringLength(255)]
         public string? OrderStatus { get; set; }
     }
 }

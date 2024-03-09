@@ -77,6 +77,19 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
             return BadRequest(ModelState);
         }
 
+        if (Product.CategoryId != null) {
+            var category = await _context.Categories.FindAsync(Product.CategoryId);
+            if (category == null) {
+                return BadRequest(new { message = "Category does not exist" });
+            }
+        }
+
+        var existingProduct = await _context.Products.FirstOrDefaultAsync(p => p.ProductName == Product.ProductName);
+        if (existingProduct != null)
+        {
+            return BadRequest(new { message = "Product already exists" });
+        }
+
         var imageName = "";
 
         // Save image to server
@@ -103,19 +116,6 @@ public class ProductsController(MyDbContext context, UrlHelper urlHelper) : Cont
             ProductImage = imageName == "" ? null : imageName,
             CategoryId = Product.CategoryId
         };
-
-        if (product.CategoryId != null) {
-            var category = await _context.Categories.FindAsync(product.CategoryId);
-            if (category == null) {
-                return BadRequest(new { message = "Category does not exist" });
-            }
-        }
-
-        var existingProduct = await _context.Products.FirstOrDefaultAsync(p => p.ProductName == product.ProductName);
-        if (existingProduct != null)
-        {
-            return BadRequest(new { message = "Product already exists" });
-        }
 
         try
         {

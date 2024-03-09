@@ -81,17 +81,17 @@ public class CategoriesController(MyDbContext context, UrlHelper urlHelper) : Co
             return BadRequest(ModelState);
         }
 
+        var existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.CategoryName == Category.CategoryName);
+        if (existingCategory != null)
+        {
+            return BadRequest(new { message = "Category already exists" });
+        }
+
         Category category = new()
         {
             CategoryName = Category.CategoryName,
             CategoryDescription = Category.CategoryDescription
         };
-
-        var existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.CategoryName == category.CategoryName);
-        if (existingCategory != null)
-        {
-            return BadRequest(new { message = "Category already exists" });
-        }
 
         try
         {
