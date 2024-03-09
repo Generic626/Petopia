@@ -25,9 +25,8 @@ public partial class CustomersController(MyDbContext context, TokenService token
                 CustomerUsername = c.CustomerUsername,
                 CustomerContact = c.CustomerContact,
                 CustomerAddress = c.CustomerAddress,
-                CreatedAt = c.CreatedAt
             })
-            .OrderByDescending(c => c.CreatedAt)
+            .OrderBy(c => c.CustomerUsername)
             .ToListAsync();
     }
 
@@ -41,8 +40,7 @@ public partial class CustomersController(MyDbContext context, TokenService token
                 CustomerId = c.CustomerId,
                 CustomerUsername = c.CustomerUsername,
                 CustomerContact = c.CustomerContact,
-                CustomerAddress = c.CustomerAddress,
-                CreatedAt = c.CreatedAt
+                CustomerAddress = c.CustomerAddress
             })
             .FirstOrDefaultAsync(c => c.CustomerId == id);
 
@@ -92,8 +90,8 @@ public partial class CustomersController(MyDbContext context, TokenService token
         {
             CustomerUsername = Customer.CustomerUsername,
             CustomerPassword = Customer.HashPassword(Customer.CustomerPassword),
-            CustomerContact = Customer.CustomerContact ?? "",
-            CustomerAddress = Customer.CustomerAddress ?? ""
+            CustomerContact = Customer.CustomerContact,
+            CustomerAddress = Customer.CustomerAddress
         };
 
         // Check if username already exists
@@ -119,7 +117,6 @@ public partial class CustomersController(MyDbContext context, TokenService token
             CustomerUsername = customer.CustomerUsername,
             CustomerContact = customer.CustomerContact,
             CustomerAddress = customer.CustomerAddress,
-            CreatedAt = customer.CreatedAt,
             Token = _tokenService.GenerateJwtToken(customer)
         };
 
@@ -155,7 +152,6 @@ public partial class CustomersController(MyDbContext context, TokenService token
             CustomerUsername = customer.CustomerUsername,
             CustomerContact = customer.CustomerContact,
             CustomerAddress = customer.CustomerAddress,
-            CreatedAt = customer.CreatedAt,
             Token = _tokenService.GenerateJwtToken(customer)
         };
 
@@ -229,8 +225,7 @@ public partial class CustomersController(MyDbContext context, TokenService token
             CustomerId = customerModified.CustomerId,
             CustomerUsername = customerModified.CustomerUsername,
             CustomerContact = customerModified.CustomerContact,
-            CustomerAddress = customerModified.CustomerAddress,
-            CreatedAt = customerModified.CreatedAt
+            CustomerAddress = customerModified.CustomerAddress
         };
 
         return customerDTO;

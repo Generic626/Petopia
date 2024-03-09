@@ -21,7 +21,7 @@
 
 LOCK TABLES `Products` WRITE;
 /*!40000 ALTER TABLE `Products` DISABLE KEYS */;
-INSERT INTO `Products` VALUES ('2b65330e-ac27-45a7-9a48-fb59deb09718','Dog Food Number 1','The best dog food in the world.',12.99,60,'dog, food, green','b721be86-4a14-4c36-9a2d-7cba52047160.webp','0384a9ef-d108-477b-ad48-b944537a9ff5','2024-03-06 18:18:11');
+INSERT INTO `Products` VALUES ('2b65330e-ac27-45a7-9a48-fb59deb09718','Dog Food Number 1','The best dog food in the world.',12.99,60,'dog, food, green','b721be86-4a14-4c36-9a2d-7cba52047160.webp','0384a9ef-d108-477b-ad48-b944537a9ff5','2024-03-06 18:18:11', '2024-03-06 18:18:11', null);
 /*!40000 ALTER TABLE `Products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

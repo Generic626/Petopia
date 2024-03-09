@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace petopia_server.Models
 {
-    public class Admin
+    public class Admin: BaseModel
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; } = Guid.NewGuid();
@@ -12,7 +12,6 @@ namespace petopia_server.Models
         public required string Username { get; set; }
         [StringLength(255)]
         public required string Password { get; set; }
-        public DateTime CreatedAt { get; set; } // Datetime is not supported by default in MySQL, make sure to config it in DbContext
         
         private readonly PasswordHasher<Admin> _passwordHasher = new();
 
@@ -32,7 +31,6 @@ namespace petopia_server.Models
     {
         public Guid Id { get; set; }
         public required string Username { get; set; }
-        public DateTime CreatedAt { get; set; }
         public string? Token { get; set; }
     }
 
@@ -40,6 +38,5 @@ namespace petopia_server.Models
     {
         public Guid Id { get; set; }
         public required string Username { get; set; }
-        public DateTime CreatedAt { get; set; }
     }
 }

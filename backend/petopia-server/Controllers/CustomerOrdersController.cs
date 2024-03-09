@@ -32,7 +32,6 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
                 CustomerUsername = c.CustomerUsername,
                 CustomerContact = c.CustomerContact,
                 CustomerAddress = c.CustomerAddress,
-                CreatedAt = c.CreatedAt
             }).FirstOrDefaultAsync(c => c.CustomerId == customerOrder[0].CustomerId);
 
         // Get products
@@ -217,8 +216,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
                 CustomerId = customerExists.CustomerId,
                 CustomerUsername = customerExists.CustomerUsername,
                 CustomerContact = customerExists.CustomerContact,
-                CustomerAddress = customerExists.CustomerAddress,
-                CreatedAt = customerExists.CreatedAt
+                CustomerAddress = customerExists.CustomerAddress
             },
             Products = [.. productExistsList.Select(c => new ProductDTO_ORDER
             {

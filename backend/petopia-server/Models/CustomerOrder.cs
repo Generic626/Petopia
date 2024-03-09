@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace petopia_server.Models
 {
-    public class CustomerOrder
+    public class CustomerOrder: BaseModel
     {
         [StringLength(25)]
         public required string OrderId { get; set; }
@@ -16,7 +16,6 @@ namespace petopia_server.Models
         public required int OrderedQuantity { get; set; }
         [StringLength(255)]
         public string? OrderStatus { get; set; }
-        public DateTime CreatedAt { get; set; } // Datetime is not supported by default in MySQL, make sure to config it in DbContext
     }
 
     public class CustomerOrderDTO_ORDER

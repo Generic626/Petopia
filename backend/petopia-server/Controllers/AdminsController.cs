@@ -21,10 +21,9 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
             .Select(a => new AdminDTO_PRINT
             {
                 Id = a.Id,
-                Username = a.Username,
-                CreatedAt = a.CreatedAt
+                Username = a.Username
             })
-            .OrderByDescending(a => a.CreatedAt)
+            .OrderBy(a => a.Username)
             .ToListAsync();
     }
 
@@ -36,8 +35,7 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
             .Select(a => new AdminDTO_PRINT
             {
                 Id = a.Id,
-                Username = a.Username,
-                CreatedAt = a.CreatedAt
+                Username = a.Username
             })
             .FirstOrDefaultAsync(a => a.Id == id);
 
@@ -110,7 +108,6 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
         {
             Id = admin.Id,
             Username = admin.Username,
-            CreatedAt = admin.CreatedAt,
             Token = _tokenService.GenerateJwtToken(admin)
         };
 
@@ -144,7 +141,6 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
         {
             Id = admin.Id,
             Username = admin.Username,
-            CreatedAt = admin.CreatedAt,
             Token = _tokenService.GenerateJwtToken(admin)
         };
 

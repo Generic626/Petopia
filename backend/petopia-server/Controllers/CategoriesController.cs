@@ -22,7 +22,6 @@ public class CategoriesController(MyDbContext context, UrlHelper urlHelper) : Co
                 CategoryId = c.CategoryId,
                 CategoryName = c.CategoryName,
                 CategoryDescription = c.CategoryDescription,
-                CreatedAt = c.CreatedAt,
                 Products = c.Products == null ? null : c.Products.Select(p => new ProductDTONoCategory
                 {
                     ProductId = p.ProductId,
@@ -50,7 +49,6 @@ public class CategoriesController(MyDbContext context, UrlHelper urlHelper) : Co
                 CategoryId = c.CategoryId,
                 CategoryName = c.CategoryName,
                 CategoryDescription = c.CategoryDescription,
-                CreatedAt = c.CreatedAt,
                 Products = c.Products == null ? null : c.Products.Select(p => new ProductDTONoCategory
                 {
                     ProductId = p.ProductId,
@@ -86,7 +84,7 @@ public class CategoriesController(MyDbContext context, UrlHelper urlHelper) : Co
         Category category = new()
         {
             CategoryName = Category.CategoryName,
-            CategoryDescription = Category.CategoryDescription ?? ""
+            CategoryDescription = Category.CategoryDescription
         };
 
         var existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.CategoryName == category.CategoryName);
@@ -110,7 +108,6 @@ public class CategoriesController(MyDbContext context, UrlHelper urlHelper) : Co
             CategoryId = category.CategoryId,
             CategoryName = category.CategoryName,
             CategoryDescription = category.CategoryDescription,
-            CreatedAt = category.CreatedAt
         };
 
         return CreatedAtAction("GetCategory", new { id = categoryDTO.CategoryId }, categoryDTO);

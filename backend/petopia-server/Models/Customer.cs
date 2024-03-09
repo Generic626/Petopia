@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace petopia_server.Models
 {
-    public class Customer
+    public class Customer: BaseModel
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid CustomerId { get; set; } = Guid.NewGuid();
@@ -16,7 +16,6 @@ namespace petopia_server.Models
         public string? CustomerContact { get; set; }
         [StringLength(255)]
         public string? CustomerAddress { get; set; }
-        public DateTime CreatedAt { get; set; } // Datetime is not supported by default in MySQL, make sure to config it in DbContext
         
         private readonly PasswordHasher<Customer> _passwordHasher = new();
 
@@ -38,7 +37,6 @@ namespace petopia_server.Models
         public required string CustomerUsername { get; set; }
         public string? CustomerContact { get; set; }
         public string? CustomerAddress { get; set; }
-        public DateTime CreatedAt { get; set; }
         public string? Token { get; set; }
     }
 
@@ -48,7 +46,6 @@ namespace petopia_server.Models
         public required string CustomerUsername { get; set; }
         public string? CustomerContact { get; set; }
         public string? CustomerAddress { get; set; }
-        public DateTime CreatedAt { get; set; }
     }
 
     public class CustomerDTO_MODIFY
