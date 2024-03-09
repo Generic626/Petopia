@@ -23,7 +23,7 @@ const UploadPage = () => {
     const [productImage, setProductImage] = useState(null);
     const [productCategory, setProductCategory] = useState('');
     const [errors, setErrors] = useState({});
-    const [postError, setPostError] = useState("");
+    const [postError, setPostError] = useState([]);
 
     const formValidation = () => {
         let errors = {};
@@ -72,25 +72,31 @@ const UploadPage = () => {
                 setIsSuccess(true);
             })
             .catch((error) => {
+                let newPostError = [...postError]; // create a copy of the current state
                 if (error.response && error.response.data && error.response.data.message) { // server custom error message
-                    setPostError(error.response.data.message);
+                    newPostError.push(error.response.data.message);
                 } else if (error.response && error.response.data && error.response.data.errors) { // server default error message
                     if (error.response.data.errors.constructor === Object && Object.keys(error.response.data.errors).length > 0) {
-                        setPostError(Object.values(error.response.data.errors).join(", "));
+                        newPostError = Object.values(error.response.data.errors).map((error) => error[0]);
                     } else {
-                        setPostError("An error occurred while uploading the product");
+                        newPostError.push("An error occurred while uploading the product");
                     }
                 } else if (error.message) { // axios error message
-                    setPostError(error.message);
+                    newPostError.push(error.message);
                 } else {
-                    setPostError("An error occurred while uploading the product");
+                    newPostError.push("An error occurred while uploading the product");
                 }
+                setPostError(newPostError); // update the state with the new array
             });
     };
 
     return (
         <NavbarLayout>
-            {postError && <Alert severity="error" onClose={() => setPostError("")}>{postError}</Alert>}
+            {postError && postError.map((error, index) => (
+                <Alert key={index} severity="error" onClose={() => setPostError(postError.filter((_, i) => i !== index))}>
+                    {error}
+                </Alert>
+                ))}
             <div className=" m-auto h-screen w-[500px] p-5 justify-center flex flex-col">
                 <div className="text-left ">
                     <h1 className="text-[30px] font-semibold mb-4 ">Upload Product</h1>
