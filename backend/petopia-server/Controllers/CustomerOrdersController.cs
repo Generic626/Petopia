@@ -30,6 +30,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
             {
                 CustomerId = c.CustomerId,
                 CustomerUsername = c.CustomerUsername,
+                CustomerEmail = c.CustomerEmail,
                 CustomerContact = c.CustomerContact,
                 CustomerAddress = c.CustomerAddress,
             }).FirstOrDefaultAsync(c => c.CustomerId == customerOrder[0].CustomerId);
@@ -215,6 +216,7 @@ public class CustomerOrdersController(MyDbContext context, UrlHelper urlHelper) 
             {
                 CustomerId = customerExists.CustomerId,
                 CustomerUsername = customerExists.CustomerUsername,
+                CustomerEmail = customerExists.CustomerEmail,
                 CustomerContact = customerExists.CustomerContact,
                 CustomerAddress = customerExists.CustomerAddress
             },

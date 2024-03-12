@@ -54,8 +54,9 @@ The base URL for the API is ```http://localhost:5290```.
 🟡 Request ```POST /api/customers/register```
 ```json
 {
-    "customerUsername": "customer_a1", // required
-    "customerPassword": "customer_a1", // required
+    "customerUsername": "customer_a1",      // required
+    "customerPassword": "customer_a1",      // required
+    "customerEmail": "customer@gmail.com",  // required
     "customerContact": "98765432",
     "customerAddress": "123, ABC Street, Singapore"
 }
@@ -66,6 +67,7 @@ Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad R
 {
     "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
     "customerUsername": "customer_a1",
+    "customerEmail": "customer@gmail.com",
     "customerContact": "98765432",
     "customerAddress": "123, ABC Street, Singapore",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImN1c3RvbWVyX2ExIiwibmFtZWlkIjoiZDc1MjY3NjMtNTRhNS00NWJmLWFhY2MtOTMyMzYwOThmYWRiIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzA5NzM5MDg5LCJleHAiOjE3MDk3NDI2ODksImlhdCI6MTcwOTczOTA4OSwiaXNzIjoicGV0b3BpYSIsImF1ZCI6InBldG9waWEifQ.LbCzSmecdrXwr74ksvjha8kFmf-c61ffpugmbYwDsc0"
@@ -88,6 +90,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```400 Bad Reques
 {
     "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
     "customerUsername": "customer_a1",
+    "customerEmail": "customer@gmail.com",
     "customerContact": "98765432",
     "customerAddress": "123, ABC Street, Singapore",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImN1c3RvbWVyX2ExIiwibmFtZWlkIjoiZDc1MjY3NjMtNTRhNS00NWJmLWFhY2MtOTMyMzYwOThmYWRiIiwicm9sZSI6IkN1c3RvbWVyIiwibmJmIjoxNzA5NzM5MDg5LCJleHAiOjE3MDk3NDI2ODksImlhdCI6MTcwOTczOTA4OSwiaXNzIjoicGV0b3BpYSIsImF1ZCI6InBldG9waWEifQ.LbCzSmecdrXwr74ksvjha8kFmf-c61ffpugmbYwDsc0"
@@ -99,6 +102,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```400 Bad Reques
 🟡 Request ```POST /api/customers/modify```
 ```json
 {
+    "newEmail": "customer@gmail.com",
     "newContact": "12345678",
     "newAddress": "PolyU, Hong Kong",
     "newPassword": "customer_a1_password"
@@ -110,6 +114,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```400 Bad Reques
 {
     "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
     "customerUsername": "customer_a1",
+    "customerEmail": "customer@gmail.com",
     "customerContact": "12345678",
     "customerAddress": "PolyU, Hong Kong"
 }
@@ -125,12 +130,14 @@ Response [```200 OK (Can be empty array if no customers exist)```](#200-ok-201-c
     {
         "customerId": "2cac11e3-d5eb-40c1-b174-b45f72dffb04",
         "customerUsername": "customer_a2",
+        "customerEmail": "customer@gmail.com",
         "customerContact": null,
         "customerAddress": null
     },
     {
         "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
         "customerUsername": "customer_a1",
+        "customerEmail": "customer@gmail.com",
         "customerContact": "12345678",
         "customerAddress": "PolyU, Hong Kong"
     }
@@ -146,6 +153,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```401 Unauthoriz
 {
     "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
     "customerUsername": "customer_a1",
+    "customerEmail": "customer@gmail.com",
     "customerContact": "12345678",
     "customerAddress": "PolyU, Hong Kong"
 }
@@ -320,6 +328,7 @@ Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad R
     "customer": {
         "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
         "customerUsername": "customer_a1",
+        "customerEmail": "customer@gmail.com",
         "customerContact": "12345678",
         "customerAddress": "PolyU, Hong Kong"
     },
@@ -355,6 +364,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```404 Not Found`
     "customer": {
         "customerId": "d7526763-54a5-45bf-aacc-93236098fadb",
         "customerUsername": "customer_a1",
+        "customerEmail": "customer@gmail.com",
         "customerContact": "12345678",
         "customerAddress": "PolyU, Hong Kong"
     },
@@ -417,8 +427,9 @@ Response [```200 OK (Can be empty array if no orders exist)```](#200-ok-201-crea
 🟡 Request ```POST /api/admins/register```
 ```json
 {
-    "username": "admin_123", // required
-    "password": "admin_123"  // required
+    "username": "admin_123",    // required
+    "password": "admin_123",    // required
+    "email": "admin@admin.com"  // required
 }
 ```
 
@@ -427,6 +438,7 @@ Response [```201 Created```](#200-ok-201-created-204-no-content) / [```400 Bad R
 {
     "id": "838072d3-d9b7-4123-9bbc-bfe35d44794c",
     "username": "admin_123",
+    "email": "admin@admin.com",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluXzEyMyIsIm5hbWVpZCI6IjgzODA3MmQzLWQ5YjctNDEyMy05YmJjLWJmZTM1ZDQ0Nzk0YyIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTcwOTczMzAyNCwiZXhwIjoxNzA5NzM2NjI0LCJpYXQiOjE3MDk3MzMwMjQsImlzcyI6InBldG9waWEiLCJhdWQiOiJwZXRvcGlhIn0.s2R_3SkBSQtZ9VWyaxm_O6jHAiYuCWlR2YNmVzVhynM"
 }
 ```
@@ -447,6 +459,7 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```400 Bad Reques
 {
     "id": "838072d3-d9b7-4123-9bbc-bfe35d44794c",
     "username": "admin_123",
+    "email": "admin@admin.com",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluXzEyMyIsIm5hbWVpZCI6IjgzODA3MmQzLWQ5YjctNDEyMy05YmJjLWJmZTM1ZDQ0Nzk0YyIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTcwOTczMzAyNCwiZXhwIjoxNzA5NzM2NjI0LCJpYXQiOjE3MDk3MzMwMjQsImlzcyI6InBldG9waWEiLCJhdWQiOiJwZXRvcGlhIn0.s2R_3SkBSQtZ9VWyaxm_O6jHAiYuCWlR2YNmVzVhynM"
 }
 ```
@@ -460,7 +473,8 @@ Response [```200 OK (Can be empty array if no admins exist)```](#200-ok-201-crea
 [
     {
         "id": "838072d3-d9b7-4123-9bbc-bfe35d44794c",
-        "username": "admin_123"
+        "username": "admin_123",
+        "email": "admin@admin.com"
     }
 ]
 ```
@@ -473,7 +487,8 @@ Response [```200 OK```](#200-ok-201-created-204-no-content) / [```401 Unauthoriz
 ```json
 {
     "id": "838072d3-d9b7-4123-9bbc-bfe35d44794c",
-    "username": "admin_123"
+    "username": "admin_123",
+    "email": "admin@admin.com"
 }
 ```
 

@@ -21,7 +21,8 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
             .Select(a => new AdminDTO_PRINT
             {
                 Id = a.Id,
-                Username = a.Username
+                Username = a.Username,
+                Email = a.Email
             })
             .OrderBy(a => a.Username)
             .ToListAsync();
@@ -35,7 +36,8 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
             .Select(a => new AdminDTO_PRINT
             {
                 Id = a.Id,
-                Username = a.Username
+                Username = a.Username,
+                Email = a.Email
             })
             .FirstOrDefaultAsync(a => a.Id == id);
 
@@ -81,6 +83,16 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
                 return BadRequest(new { message = "Password must contain at least one letter, one number, and one special character" });
         }
 
+        // Email checking
+        try
+        {
+            var mailAddress = new System.Net.Mail.MailAddress(Admin.Email);
+        }
+        catch (FormatException)
+        {
+            return BadRequest(new { message = "Invalid email" });
+        }
+
         // Check if username already exists
         var existingAdmin = await _context.Admins.FirstOrDefaultAsync(a => a.Username == Admin.Username);
         if (existingAdmin != null)
@@ -91,7 +103,8 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
         Admin admin = new()
         {
             Username = Admin.Username,
-            Password = Admin.HashPassword(Admin.Password)
+            Password = Admin.HashPassword(Admin.Password),
+            Email = Admin.Email
         };
 
         try
@@ -108,6 +121,7 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
         {
             Id = admin.Id,
             Username = admin.Username,
+            Email = admin.Email,
             Token = _tokenService.GenerateJwtToken(admin)
         };
 
@@ -116,7 +130,7 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
 
     // POST: api/Admins/Login
     [HttpPost("Login")]
-    public async Task<ActionResult<AdminDTO>> LoginAdmin(Admin Admin)
+    public async Task<ActionResult<AdminDTO>> LoginAdmin(AdminDTO_LOGIN Admin)
     {
         if (!ModelState.IsValid)
         {
@@ -141,6 +155,7 @@ public partial class AdminsController(MyDbContext context, TokenService tokenSer
         {
             Id = admin.Id,
             Username = admin.Username,
+            Email = admin.Email,
             Token = _tokenService.GenerateJwtToken(admin)
         };
 

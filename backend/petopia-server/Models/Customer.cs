@@ -13,6 +13,8 @@ namespace petopia_server.Models
         [StringLength(255)]
         public required string CustomerPassword { get; set; }
         [StringLength(255)]
+        public required string CustomerEmail { get; set; }
+        [StringLength(255)]
         public string? CustomerContact { get; set; }
         [StringLength(255)]
         public string? CustomerAddress { get; set; }
@@ -35,15 +37,23 @@ namespace petopia_server.Models
     {
         public Guid CustomerId { get; set; }
         public required string CustomerUsername { get; set; }
+        public required string CustomerEmail { get; set; }
         public string? CustomerContact { get; set; }
         public string? CustomerAddress { get; set; }
         public string? Token { get; set; }
+    }
+    
+    public class CustomerDTO_LOGIN
+    {
+        public required string CustomerUsername { get; set; }
+        public required string CustomerPassword { get; set; }
     }
 
     public class CustomerDTO_PRINT
     {
         public Guid CustomerId { get; set; }
         public required string CustomerUsername { get; set; }
+        public required string CustomerEmail { get; set; }
         public string? CustomerContact { get; set; }
         public string? CustomerAddress { get; set; }
     }
@@ -51,6 +61,8 @@ namespace petopia_server.Models
     public class CustomerDTO_MODIFY
     {
         public Guid CustomerId { get; set; }
+        [StringLength(255)]
+        public string? NewEmail { get; set; }
         [StringLength(255)]
         public string? NewContact { get; set; }
         [StringLength(255)]

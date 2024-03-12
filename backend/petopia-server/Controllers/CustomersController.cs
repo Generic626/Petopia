@@ -23,6 +23,7 @@ public partial class CustomersController(MyDbContext context, TokenService token
             {
                 CustomerId = c.CustomerId,
                 CustomerUsername = c.CustomerUsername,
+                CustomerEmail = c.CustomerEmail,
                 CustomerContact = c.CustomerContact,
                 CustomerAddress = c.CustomerAddress,
             })
@@ -39,6 +40,7 @@ public partial class CustomersController(MyDbContext context, TokenService token
             {
                 CustomerId = c.CustomerId,
                 CustomerUsername = c.CustomerUsername,
+                CustomerEmail = c.CustomerEmail,
                 CustomerContact = c.CustomerContact,
                 CustomerAddress = c.CustomerAddress
             })
@@ -86,6 +88,16 @@ public partial class CustomersController(MyDbContext context, TokenService token
                 return BadRequest(new { message = "Password must contain at least one letter, one number, and one special character" });
         }
 
+        // Email checking
+        try
+        {
+            var mailAddress = new System.Net.Mail.MailAddress(Customer.CustomerEmail);
+        }
+        catch (FormatException)
+        {
+            return BadRequest(new { message = "Invalid email" });
+        }
+
         // Check if username already exists
         var existingCustomer = await _context.Customers.FirstOrDefaultAsync(c => c.CustomerUsername == Customer.CustomerUsername);
         if (existingCustomer != null)
@@ -97,6 +109,7 @@ public partial class CustomersController(MyDbContext context, TokenService token
         {
             CustomerUsername = Customer.CustomerUsername,
             CustomerPassword = Customer.HashPassword(Customer.CustomerPassword),
+            CustomerEmail = Customer.CustomerEmail,
             CustomerContact = Customer.CustomerContact,
             CustomerAddress = Customer.CustomerAddress
         };
@@ -115,6 +128,7 @@ public partial class CustomersController(MyDbContext context, TokenService token
         {
             CustomerId = customer.CustomerId,
             CustomerUsername = customer.CustomerUsername,
+            CustomerEmail = customer.CustomerEmail,
             CustomerContact = customer.CustomerContact,
             CustomerAddress = customer.CustomerAddress,
             Token = _tokenService.GenerateJwtToken(customer)
@@ -125,7 +139,7 @@ public partial class CustomersController(MyDbContext context, TokenService token
 
     // POST: api/Customers/Login
     [HttpPost("Login")]
-    public async Task<ActionResult<CustomerDTO>> LoginCustomer(Customer Customer)
+    public async Task<ActionResult<CustomerDTO>> LoginCustomer(CustomerDTO_LOGIN Customer)
     {
         if (!ModelState.IsValid)
         {
@@ -150,6 +164,7 @@ public partial class CustomersController(MyDbContext context, TokenService token
         {
             CustomerId = customer.CustomerId,
             CustomerUsername = customer.CustomerUsername,
+            CustomerEmail = customer.CustomerEmail,
             CustomerContact = customer.CustomerContact,
             CustomerAddress = customer.CustomerAddress,
             Token = _tokenService.GenerateJwtToken(customer)
@@ -200,11 +215,24 @@ public partial class CustomersController(MyDbContext context, TokenService token
             customer.CustomerPassword = customer.HashPassword(Customer.NewPassword);
         }
 
+        if (Customer.NewEmail != null && Customer.NewEmail.Length != 0)
+        {
+            try
+            {
+                var mailAddress = new System.Net.Mail.MailAddress(Customer.NewEmail);
+            }
+            catch (FormatException)
+            {
+                return BadRequest(new { message = "Invalid email" });
+            }
+        }
+
         Customer customerModified = new()
         {
             CustomerId = customer.CustomerId,
             CustomerUsername = customer.CustomerUsername,
             CustomerPassword = customer.CustomerPassword,
+            CustomerEmail = Customer.NewEmail ?? customer.CustomerEmail,
             CustomerContact = Customer.NewContact ?? customer.CustomerContact,
             CustomerAddress = Customer.NewAddress ?? customer.CustomerAddress,
             CreatedAt = customer.CreatedAt
@@ -224,6 +252,7 @@ public partial class CustomersController(MyDbContext context, TokenService token
         {
             CustomerId = customerModified.CustomerId,
             CustomerUsername = customerModified.CustomerUsername,
+            CustomerEmail = customerModified.CustomerEmail,
             CustomerContact = customerModified.CustomerContact,
             CustomerAddress = customerModified.CustomerAddress
         };
