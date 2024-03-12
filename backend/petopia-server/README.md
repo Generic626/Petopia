@@ -7,27 +7,31 @@
 
 ## Installation
 
-1. Change the login credentials in `appsettings.json` to match your mysql server settings
+1. Create a new file named `appsettings.json` from the template `appsettings.json.template` and save it in the same directory
+   ```sh
+   cp appsettings.json.template appsettings.json
+   ```
+2. Change the login credentials in `appsettings.json` to match your mysql server settings
    ```json
    "ConnectionStrings": {
       "DefaultConnection": "server=localhost;port=3306;database=petopia_server_db;user=root;password=root"
    }
    ```
-2. Make sure you have [dotnet-ef](https://learn.microsoft.com/en-us/ef/core/cli/dotnet) installed
+3. Make sure you have [dotnet-ef](https://learn.microsoft.com/en-us/ef/core/cli/dotnet) installed
    ```sh
    dotnet tool install --global dotnet-ef
    ```
-3. Run automated migration script to create the database
+4. Run automated migration script to create the database
    ```sh
    ./auto_migrate.sh
    ```
-4. Import dummy data by importing ```DummyData``` folder to your mysql server
+5. Import dummy data by importing ```DummyData``` folder to your mysql server
    1. Open mysql workbench
    2. Select ```Server``` > ```Data Import```
    3. Select ```Import from Dump Project Folder```
    4. Select the ```DummyData``` folder
    5. Click ```Start Import```
-5. Run the server
+6. Run the server
    ```sh
     dotnet run
     ```
