@@ -16,12 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Admins`
+--
+
+DROP TABLE IF EXISTS `Admins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Admins` (
+  `Id` char(36) NOT NULL,
+  `Username` varchar(255) NOT NULL,
+  `Password` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `CreatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `DeletedAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `IX_Admins_Username` (`Username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `Admins`
 --
 
 LOCK TABLES `Admins` WRITE;
 /*!40000 ALTER TABLE `Admins` DISABLE KEYS */;
-INSERT INTO `Admins` VALUES ('96b2a2ea-4ee2-48b5-9426-34e955bd65e3','admin_123','AQAAAAIAAYagAAAAEB4hYkKbrHI589qg3SroJ95BKOCBNocQv3Y9HjQtj5qmTX0oeICjjNobiKRQHD6FHQ==','2024-03-07 08:40:52', '2024-03-07 08:40:52', null);
+INSERT INTO `Admins` VALUES ('96b2a2ea-4ee2-48b5-9426-34e955bd65e3','admin_123','AQAAAAIAAYagAAAAEB4hYkKbrHI589qg3SroJ95BKOCBNocQv3Y9HjQtj5qmTX0oeICjjNobiKRQHD6FHQ==','admin@admin.com','2024-03-07 08:40:52','2024-03-07 08:40:52',NULL);
 /*!40000 ALTER TABLE `Admins` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -34,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-07 10:02:42
+-- Dump completed on 2024-03-12 23:02:32

@@ -16,12 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `CustomerOrders`
+--
+
+DROP TABLE IF EXISTS `CustomerOrders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `CustomerOrders` (
+  `OrderId` varchar(25) NOT NULL,
+  `CustomerId` char(36) NOT NULL,
+  `ProductId` char(36) NOT NULL,
+  `OrderedQuantity` int NOT NULL,
+  `OrderStatus` varchar(255) DEFAULT NULL,
+  `CreatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `DeletedAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`OrderId`,`CustomerId`,`ProductId`),
+  KEY `IX_CustomerOrders_CustomerId` (`CustomerId`),
+  KEY `IX_CustomerOrders_ProductId` (`ProductId`),
+  CONSTRAINT `FK_CustomerOrders_Customers_CustomerId` FOREIGN KEY (`CustomerId`) REFERENCES `Customers` (`CustomerId`) ON DELETE CASCADE,
+  CONSTRAINT `FK_CustomerOrders_Products_ProductId` FOREIGN KEY (`ProductId`) REFERENCES `Products` (`ProductId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `CustomerOrders`
 --
 
 LOCK TABLES `CustomerOrders` WRITE;
 /*!40000 ALTER TABLE `CustomerOrders` DISABLE KEYS */;
-INSERT INTO `CustomerOrders` VALUES ('1905f82e20240306183246','d7526763-54a5-45bf-aacc-93236098fadb','2b65330e-ac27-45a7-9a48-fb59deb09718',2,'Processing','2024-03-06 18:32:46', '2024-03-06 18:32:46', null);
+INSERT INTO `CustomerOrders` VALUES ('1905f82e20240306183246','d7526763-54a5-45bf-aacc-93236098fadb','2b65330e-ac27-45a7-9a48-fb59deb09718',2,'Processing','2024-03-06 18:32:46','2024-03-06 18:32:46',NULL);
 /*!40000 ALTER TABLE `CustomerOrders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -34,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-06 18:34:05
+-- Dump completed on 2024-03-12 23:02:32
