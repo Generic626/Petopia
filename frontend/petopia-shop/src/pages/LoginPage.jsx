@@ -49,10 +49,15 @@ const LoginPage = () => {
       try {
         // submit to api to create account
         // redirect user to main page
-        const loginPayload = { email, password };
-        // const response = await axios.post("", loginPayload);
-        // const user = response.data;
-
+        const loginPayload = {
+          customerUsername: email,
+          customerPassword: password,
+        };
+        const response = await axios.post(
+          "http://localhost:5290/api/customers/login",
+          loginPayload
+        );
+        const user = response.data;
         setUser("customer");
         navigate(`/`);
       } catch (error) {

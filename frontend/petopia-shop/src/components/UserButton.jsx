@@ -2,6 +2,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { getUser, signOutUser } from "../functions/user-management";
 import { FaUserCircle } from "react-icons/fa";
 
+import { NavLink } from "react-router-dom";
+
 const UserButton = () => {
   const user = getUser();
 
@@ -14,7 +16,6 @@ const UserButton = () => {
               <Menu.Button>
                 <div className="flex items-center">
                   <FaUserCircle className="h-[30px] w-[30px] mr-2" />
-                  Hello User
                 </div>
               </Menu.Button>
 
@@ -59,8 +60,8 @@ const UserButton = () => {
                     <div className="py-1">
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="/"
+                          <NavLink
+                            to="/upload"
                             className={`${
                               active
                                 ? "bg-gray-100 text-gray-900"
@@ -68,7 +69,7 @@ const UserButton = () => {
                             } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
                           >
                             Upload Product
-                          </a>
+                          </NavLink>
                         )}
                       </Menu.Item>
                     </div>
