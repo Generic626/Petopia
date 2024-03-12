@@ -7,6 +7,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import UserCartPage from "./pages/UserCartPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import UploadPage from "./pages/UploadPage";
+import OrderPage from "./pages/OrderPage";
 
 import AdminLoginPage from "./pages/AdminLoginPage";
 
@@ -22,6 +23,7 @@ const Router = () => {
       <Route path="/user-cart" element={<UserCartPage />} />
       <Route path="/product-detail" element={<ProductDetailPage />} />
       <Route path="/upload" element={<UploadPage />} />
+      <Route path="/order" element={<OrderPage />} />
     </Routes>
   );
 };
