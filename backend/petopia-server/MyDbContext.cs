@@ -43,38 +43,10 @@ public class MyDbContext(DbContextOptions<MyDbContext> options) : DbContext(opti
             }
         }
 
-        modelBuilder.Entity<Product>(product =>
-        {
-            // Configure ProductName to be unique
-            product.HasIndex(e => e.ProductName)
-                .IsUnique();
-        });
-
-        modelBuilder.Entity<Category>(category => 
-        {
-            // Configure CategoryName to be unique
-            category.HasIndex(e => e.CategoryName)
-                .IsUnique();
-        });
-
-        modelBuilder.Entity<Customer>(customer =>
-        {
-            // Configure CustomerUsername to be unique
-            customer.HasIndex(e => e.CustomerUsername)
-                .IsUnique();
-        });
-
         modelBuilder.Entity<CustomerOrder>(order =>
         {
             // Configure composite key
             order.HasKey(e => new { e.OrderId, e.CustomerId, e.ProductId });
-        });
-
-        modelBuilder.Entity<Admin>(admin =>
-        {
-            // Configure Username to be unique
-            admin.HasIndex(e => e.Username)
-                .IsUnique();
         });
     }
 
