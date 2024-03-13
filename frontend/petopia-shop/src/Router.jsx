@@ -9,8 +9,8 @@ import ProfilePage from "./pages/ProfilePage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import UploadPage from "./pages/UploadPage";
 import OrderPage from "./pages/OrderPage";
-
 import AdminLoginPage from "./pages/AdminLoginPage";
+import PrivateRoutes from "./utils/PrivateRoute";
 
 const Router = () => {
   return (

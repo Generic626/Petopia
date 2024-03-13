@@ -1,11 +1,15 @@
 import brandLogo from "../assets/petopia-brand.png";
 import MainThemeContainer from "../components/UI/MainThemeContainer";
-import { TextField, Button } from "@mui/material";
+import { Alert, TextField, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import TipLink from "../components/TipLink";
 import { setUser } from "../functions/user-management";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Snackbar } from "@mui/material";
+import { useContext } from "react";
+import { SuccessContext } from "../context/success-context";
 
 const LoginPage = () => {
   // set title page name
@@ -16,8 +20,12 @@ const LoginPage = () => {
     };
   }, []);
 
+  const { success, setSuccess } = useContext(SuccessContext);
+
+  // used to navigate between pages
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
@@ -26,16 +34,23 @@ const LoginPage = () => {
     event.preventDefault();
 
     const formErrors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // check if email is empty
-    if (!email) {
-      formErrors.email = "Email is required";
-    }
+    // if (!email) {
+    //   formErrors.email = "Email is required";
+    // }
+
     // check if given email is in valid format
-    if (!emailRegex.test(email)) {
-      formErrors.email = "Invalid Email format";
+    // if (!emailRegex.test(email)) {
+    //   formErrors.email = "Invalid Email format";
+    // }
+
+    // check if the username is empty
+    if (!username) {
+      formErrors.username = "Username is required";
     }
+
     // check if password is empty
     if (!password) {
       formErrors.password = "Password is required";
@@ -47,10 +62,9 @@ const LoginPage = () => {
     } else {
       // submit the information to api to create an account
       try {
-        // submit to api to create account
-        // redirect user to main page
+        // submit to api to login as customer
         const loginPayload = {
-          customerUsername: email,
+          customerUsername: username,
           customerPassword: password,
         };
         const response = await axios.post(
@@ -58,17 +72,21 @@ const LoginPage = () => {
           loginPayload
         );
         const user = response.data;
+
         setUser(
           user.customerId,
           user.customerUsername,
+          user.customerEmail,
           user.customerContact,
           user.customerAddress,
           user.token,
           "customer"
         );
+
+        // redirect user to main page
         navigate(`/`);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
 
         formErrors.login = "Login Failed. Please try again.";
         setErrors(formErrors);
@@ -94,7 +112,7 @@ const LoginPage = () => {
           className="flex flex-col justify-center items-center w-[80%] p-2"
         >
           {/* Email input */}
-          <TextField
+          {/* <TextField
             margin="dense"
             required
             fullWidth
@@ -107,6 +125,20 @@ const LoginPage = () => {
             onChange={(e) => setEmail(e.target.value)}
             error={errors.email != undefined}
             helperText={errors.email}
+          /> */}
+          {/* Username Input */}
+          <TextField
+            margin="dense"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            autoFocus
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            error={errors.username != undefined}
+            helperText={errors.username}
           />
           {/* Password input */}
           <TextField
@@ -131,17 +163,20 @@ const LoginPage = () => {
           >
             Submit
           </button>
-          {errors.login && (
-            <Typography className=" text-red-500 text-xs" sx={{ mb: 1 }}>
-              {errors.login}
-            </Typography>
-          )}
           <NavLink
             to="/"
             className="hover:bg-primary border ease-linear duration-200 border-primary h-[40px] w-full text-primary hover:text-white rounded-full mt-4 flex items-center justify-center"
           >
             Head Back to Home
           </NavLink>
+          {/* Login Error */}
+          <div className="w-full">
+            {errors.login && (
+              <Typography className=" text-red-500 text-xs" sx={{ mb: 1 }}>
+                {errors.login}
+              </Typography>
+            )}
+          </div>
           {/* Don't have account link */}
           <div className="w-full mt-2 flex justify-between">
             <TipLink path="/sign-up" text="Don&#39;t have an account?" />
@@ -149,6 +184,34 @@ const LoginPage = () => {
           </div>
         </form>
       </div>
+
+      {/* Snackbar for success */}
+      {success.map((successText) => {
+        return (
+          <Snackbar
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            open={success.length > 0}
+            autoHideDuration={6000}
+            onClose={() => {
+              setSuccess((prev) => {
+                return prev.filter((item) => item != successText);
+              });
+            }}
+          >
+            <Alert
+              onClose={() => {
+                setSuccess((prev) => {
+                  return prev.filter((item) => item != successText);
+                });
+              }}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              {successText}
+            </Alert>
+          </Snackbar>
+        );
+      })}
     </MainThemeContainer>
   );
 };

@@ -8,7 +8,7 @@ const NavbarLayout = (props) => {
       {/* Top Nav bar */}
       <Navbar />
       {/* Main Content */}
-      <main className="w-full h-full">{props.children}</main>
+      <main className="w-full h-screen">{props.children}</main>
       {/* Footer */}
       <Footer />
     </div>

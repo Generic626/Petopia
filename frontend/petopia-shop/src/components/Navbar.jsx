@@ -8,8 +8,6 @@ import UserButton from "./UserButton.jsx";
 const Navbar = () => {
   const user = getUser();
 
-  console.log(user.role);
-
   return (
     <nav className="w-full h-[60px] bg-primary flex items-center justify-between p-4 fixed inset-0 z-10">
       {/* Left side nav items */}

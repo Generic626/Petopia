@@ -7,8 +7,10 @@ const ContextProvider = (props) => {
   const [error, setError] = useState([]);
 
   return (
-    <ErrorContext.Provider>
-      <SuccessContext.Provider>{props.children}</SuccessContext.Provider>
+    <ErrorContext.Provider value={{ error, setError }}>
+      <SuccessContext.Provider value={{ success, setSuccess }}>
+        {props.children}
+      </SuccessContext.Provider>
     </ErrorContext.Provider>
   );
 };

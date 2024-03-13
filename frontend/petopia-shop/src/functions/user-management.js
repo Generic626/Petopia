@@ -1,42 +1,45 @@
 const getUser = () => {
+  const role = sessionStorage.getItem("role");
   const id = sessionStorage.getItem("id");
   const username = sessionStorage.getItem("username");
-  const contact = sessionStorage.getItem("contact");
-  const address = sessionStorage.getItem("address");
+  const email = sessionStorage.getItem("email");
   const token = localStorage.getItem("token");
-  const role = sessionStorage.getItem("role");
 
-  return { id, username, contact, address, token, role };
+  // if current user is admin
+  if (role == "admin") {
+    return { id, username, email, token, role };
+  }
+  // if current user is customer
+  else {
+    const contact = sessionStorage.getItem("contact");
+    const address = sessionStorage.getItem("address");
+
+    return { id, username, email, contact, address, token, role };
+  }
 };
 
-const getAdmin = () => {
-  const id = sessionStorage.getItem("id");
-  const username = sessionStorage.getItem("username");
-  const token = localStorage.getItem("token");
-  const role = sessionStorage.getItem("role");
-
-  return { id, username, token, role };
-};
-
-const setUser = (id, username, contact, address, token, role) => {
+const setUser = (id, username, email, contact, address, token, role) => {
   sessionStorage.setItem("id", id);
   sessionStorage.setItem("username", username);
+  sessionStorage.setItem("email", email);
   sessionStorage.setItem("contact", contact);
   sessionStorage.setItem("address", address);
   localStorage.setItem("token", token);
   sessionStorage.setItem("role", role);
 };
 
-const setAdmin = (id, username, token, role) => {
+const setAdmin = (id, username, email, token, role) => {
   sessionStorage.setItem("id", id);
   sessionStorage.setItem("username", username);
+  sessionStorage.setItem("email", email);
   localStorage.setItem("token", token);
   sessionStorage.setItem("role", role);
 };
 
 const signOutUser = () => {
-  sessionStorage.removeItem("role");
-  window.location.reload();
+  sessionStorage.clear();
+  window.location.href = "/";
+  // window.location.reload();
 };
 
 const updateName = (role) => {};
@@ -45,4 +48,11 @@ const retrieveAuthHeader = () => {
   return "";
 };
 
-export { getUser, signOutUser, setUser, retrieveAuthHeader, updateName };
+export {
+  getUser,
+  setUser,
+  setAdmin,
+  signOutUser,
+  retrieveAuthHeader,
+  updateName,
+};

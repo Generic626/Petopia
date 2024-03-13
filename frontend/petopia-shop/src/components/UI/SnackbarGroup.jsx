@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Snackbar } from "@mui/material";
+import { Alert, Snackbar } from "@mui/material";
 import { SuccessContext } from "../../context/success-context";
 import { ErrorContext } from "../../context/error-context";
 
@@ -23,9 +23,11 @@ const SnackbarGroup = () => {
             }}
           >
             <Alert
-              //   onClose={() => {
-              //     setError({ errorText: "", isError: false });
-              //   }}
+              onClose={() => {
+                setError((prev) => {
+                  return prev.filter((item) => item != errorText);
+                });
+              }}
               severity="error"
               sx={{ width: "100%" }}
             >
@@ -49,11 +51,11 @@ const SnackbarGroup = () => {
             }}
           >
             <Alert
-              //   onClose={() => {
-              //     setSuccess((prev) => {
-              //       return prev.filter((item) => item != successText);
-              //     });
-              //   }}
+              onClose={() => {
+                setSuccess((prev) => {
+                  return prev.filter((item) => item != successText);
+                });
+              }}
               severity="success"
               sx={{ width: "100%" }}
             >

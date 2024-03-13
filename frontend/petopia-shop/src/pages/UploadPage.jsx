@@ -1,18 +1,28 @@
 import React, { useState } from "react";
 import CheckoutSuccess from "../components/CheckoutSuccess";
 import NavbarLayout from "../layout/NavbarLayout";
-import { TextField, Alert } from "@mui/material";
+import {
+  TextField,
+  Alert,
+  Select,
+  InputLabel,
+  MenuItem,
+  FormControl,
+} from "@mui/material";
 import { MuiFileInput } from "mui-file-input";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { useEffect } from "react";
+import { requestHeader } from "../functions/authentication-header";
 
 const UploadPage = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     document.title = "Upload Product";
     return () => {
       document.title = "Petopia";
     };
   }, []);
+  const header = requestHeader({ "Content-Type": "application/json" });
 
   const [isSuccess, setIsSuccess] = useState(false);
   const [productName, setProductName] = useState("");
@@ -24,6 +34,32 @@ const UploadPage = () => {
   const [productCategory, setProductCategory] = useState("");
   const [errors, setErrors] = useState({});
   const [postError, setPostError] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
+
+  // get all existing categories
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            "http://localhost:5290/api/categories/all",
+            {
+              headers: header,
+            }
+          );
+          setCategoryList(response.data);
+        } catch (error) {
+          // Handle any errors
+          console.error(error);
+        }
+      };
+
+      fetchData();
+    } catch (error) {
+      console.log(error);
+      setCategoryList([]);
+    }
+  }, []);
 
   const formValidation = () => {
     let errors = {};
@@ -53,6 +89,7 @@ const UploadPage = () => {
       return;
     }
     const formData = new FormData();
+
     formData.append("productName", productName);
     formData.append("productDescription", productDescription);
     formData.append("productPrice", productPrice);
@@ -60,6 +97,7 @@ const UploadPage = () => {
     formData.append("productKeywords", productKeywords);
     formData.append("productImage", productImage);
     formData.append("categoryId", productCategory);
+
     axios
       .post("http://localhost:5290/api/products/create", formData, {
         headers: {
@@ -75,6 +113,8 @@ const UploadPage = () => {
         setIsSuccess(true);
       })
       .catch((error) => {
+        console.log(error);
+
         let newPostError = [...postError]; // create a copy of the current state
         if (
           error.response &&
@@ -133,13 +173,25 @@ const UploadPage = () => {
         </div>
         <br />
         {/* Show Success */}
-        {isSuccess && <CheckoutSuccess message={"Upload Completed"} />}
+        {isSuccess && (
+          <div className="w-full flex flex-col ">
+            <CheckoutSuccess message={"Upload Completed"} />
+            <button
+              className="bg-primary text-white h-[50px] rounded-lg"
+              onClick={() => {
+                window.location.reload();
+              }}
+            >
+              Upload Again
+            </button>
+          </div>
+        )}
         {!isSuccess && (
           <div id="detail">
             <form
               onSubmit={handleSubmit}
               action=""
-              className="flex flex-col justify-center items-center w-[100%] p-2"
+              className="flex flex-col justify-center items-center w-[100%] p-2 gap-y-2"
             >
               {/* productName */}
               <TextField
@@ -153,6 +205,7 @@ const UploadPage = () => {
                 onChange={(e) => setProductName(e.target.value)}
                 error={errors["productName"] ? true : false}
                 helperText={errors["productName"]}
+                required
               />
 
               {/* productDescription */}
@@ -164,6 +217,7 @@ const UploadPage = () => {
                 name="productDescription"
                 value={productDescription}
                 onChange={(e) => setProductDescription(e.target.value)}
+                required
               />
 
               {/* productPrice */}
@@ -176,6 +230,7 @@ const UploadPage = () => {
                 type="number"
                 value={productPrice}
                 onChange={(e) => setProductPrice(e.target.value)}
+                required
               />
 
               {/* productQuantity */}
@@ -188,6 +243,7 @@ const UploadPage = () => {
                 type="number"
                 value={productQuantity}
                 onChange={(e) => setProductQuantity(e.target.value)}
+                required
               />
 
               {/* productKeywords */}
@@ -202,7 +258,7 @@ const UploadPage = () => {
               />
 
               {/* productCategory */}
-              <TextField
+              {/* <TextField
                 margin="dense"
                 fullWidth
                 id="productCategory"
@@ -211,7 +267,27 @@ const UploadPage = () => {
                 type="number"
                 value={productCategory}
                 onChange={(e) => setProductCategory(e.target.value)}
-              />
+              /> */}
+              <FormControl fullWidth margin="dense">
+                <InputLabel id="productCategoryLabel">Category *</InputLabel>
+                <Select
+                  fullWidth
+                  required
+                  labelId="productCategoryLabel"
+                  id="productCategory"
+                  value={productCategory}
+                  label="Category"
+                  onChange={(e) => setProductCategory(e.target.value)}
+                >
+                  {categoryList.map((category) => {
+                    return (
+                      <MenuItem value={category.categoryId}>
+                        {category.categoryName}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
 
               {/* productImage */}
               <MuiFileInput
@@ -224,6 +300,7 @@ const UploadPage = () => {
                 placeholder="Click here to upload image"
                 value={productImage}
                 onChange={(e) => setProductImage(e)}
+                required
               />
 
               {/* Submit Button */}
