@@ -58,7 +58,14 @@ const LoginPage = () => {
           loginPayload
         );
         const user = response.data;
-        setUser("customer");
+        setUser(
+          user.customerId,
+          user.customerUsername,
+          user.customerContact,
+          user.customerAddress,
+          user.token,
+          "customer"
+        );
         navigate(`/`);
       } catch (error) {
         console.log(error);
@@ -124,6 +131,11 @@ const LoginPage = () => {
           >
             Submit
           </button>
+          {errors.login && (
+            <Typography className=" text-red-500 text-xs" sx={{ mb: 1 }}>
+              {errors.login}
+            </Typography>
+          )}
           <NavLink
             to="/"
             className="hover:bg-primary border ease-linear duration-200 border-primary h-[40px] w-full text-primary hover:text-white rounded-full mt-4 flex items-center justify-center"

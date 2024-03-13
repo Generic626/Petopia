@@ -4,7 +4,7 @@ import { TextField, Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import TipLink from "../components/TipLink";
-import { setUser } from "../functions/user-management";
+import { setAdmin } from "../functions/user-management";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -49,11 +49,16 @@ const LoginPage = () => {
       try {
         // submit to api to create account
         // redirect user to main page
-        const loginPayload = { email, password };
-        // const response = await axios.post("", loginPayload);
-        // const user = response.data;
-
-        setUser("admin");
+        const loginPayload = {
+          username: email,
+          password: password,
+        };
+        const response = await axios.post(
+          "http://localhost:5290/api/admins/login",
+          loginPayload
+        );
+        const user = response.data;
+        setAdmin(user.id, user.username, user.token, "admin");
         navigate(`/`);
       } catch (error) {
         console.log(error);
@@ -119,6 +124,11 @@ const LoginPage = () => {
           >
             Submit
           </button>
+          {errors.login && (
+            <Typography className=" text-red-500 text-xs" sx={{ mb: 1 }}>
+              {errors.login}
+            </Typography>
+          )}
           <NavLink
             to="/"
             className="hover:bg-primary border ease-linear duration-200 border-primary h-[40px] w-full text-primary hover:text-white rounded-full mt-4 flex items-center justify-center"
