@@ -21,17 +21,7 @@
    ```sh
    dotnet tool install --global dotnet-ef
    ```
-4. Run automated migration script to create the database
-   ```sh
-   ./auto_migration.sh
-   ```
-5. Import dummy data by importing `DummyData` folder to your mysql server
-   1. Open mysql workbench
-   2. Select `Server` > `Data Import`
-   3. Select `Import from Dump Project Folder`
-   4. Select the `DummyData` folder
-   5. Click `Start Import`
-6. Run the server
+4. Run the server
    ```sh
     dotnet run
    ```

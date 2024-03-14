@@ -95,26 +95,32 @@ static void SeedDatabase(MyDbContext context)
 {
     if (!context.Admins.Any() && !context.Customers.Any() && !context.Categories.Any() && !context.Products.Any() && !context.CustomerOrders.Any())
     {
-        context.Admins.Add(new Admin
+        var admin = new Admin
         {
             Username = "admin_123",
             Password = "admin_123",
             Email = "admin@admin.com"
-        });
+        };
+        admin.Password = admin.HashPassword("admin_123");
+        context.Admins.Add(admin);
 
-        context.Customers.Add(new Customer
+        var customer_a1 = new Customer
         {
             CustomerUsername = "customer_a1",
             CustomerPassword = "customer_a1",
             CustomerEmail = "customer_a1@gmail.com"
-        });
+        };
+        customer_a1.CustomerPassword = customer_a1.HashPassword("customer_a1");
+        context.Customers.Add(customer_a1);
 
-        context.Customers.Add(new Customer
+        var customer_a2 = new Customer
         {
             CustomerUsername = "customer_a2",
             CustomerPassword = "customer_a2",
             CustomerEmail = "customer_a2@gmail.com"
-        });
+        };
+        customer_a2.CustomerPassword = customer_a2.HashPassword("customer_a2");
+        context.Customers.Add(customer_a2);
 
         context.Categories.Add(new Category
         {
@@ -157,7 +163,7 @@ static void SeedDatabase(MyDbContext context)
             OrderStatus = "Pending"
         });
 
-        context.SaveChangesAsync();
+        context.SaveChanges();
     }
 }
 
