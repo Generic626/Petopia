@@ -6,13 +6,13 @@ import DeleteProductButton from "./DeleteProductButton";
 const Product = (props) => {
   const navigate = useNavigate();
 
+  const product = props.product;
   const user = getUser();
-  console.log(user.role);
 
   const handleOnClick = () => {
-    navigate("/product-detail");
+    navigate(`/product-detail/${product.productId}`);
   };
-  const product = props.product;
+
   return (
     <div
       className="w-1/4 flex flex-col items-center cursor-pointer"

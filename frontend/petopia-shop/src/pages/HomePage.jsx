@@ -37,7 +37,7 @@ const HomePage = () => {
         </h1>
       </section>
       {/* Category Displacement */}
-      <section className="flex w-full items-center justify-center gap-8 h-[500px]">
+      <section className="flex w-full items-center justify-center gap-8 h-[600px]">
         {/* Dog Option */}
         <CategoryOption
           path="dog"

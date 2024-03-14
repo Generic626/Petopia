@@ -10,6 +10,7 @@ import axios from "axios";
 import { Snackbar } from "@mui/material";
 import { useContext } from "react";
 import { SuccessContext } from "../context/success-context";
+import useSnackbar from "../hook/useSnackbar";
 
 const LoginPage = () => {
   // set title page name
@@ -20,7 +21,8 @@ const LoginPage = () => {
     };
   }, []);
 
-  const { success, setSuccess } = useContext(SuccessContext);
+  // const { success, setSuccess } = useContext(SuccessContext);
+  const { success, setSuccess } = useSnackbar();
 
   // used to navigate between pages
   const navigate = useNavigate();

@@ -10,7 +10,7 @@ import axios from "axios";
 import { Modal } from "@mui/material";
 import { SuccessContext } from "../context/success-context";
 import { ErrorContext } from "../context/error-context";
-import SnackbarGroup from "../components/UI/SnackbarGroup";
+import useSnackbar from "../hook/useSnackbar";
 
 const ProductPage = () => {
   // product page states
@@ -26,17 +26,19 @@ const ProductPage = () => {
   const [selectedProduct, setSelectedProduct] = useState({ productName: "" });
 
   // use context states
-  const { success, setSuccess } = useContext(SuccessContext);
-  const { error, setError } = useContext(ErrorContext);
+  // const { success, setSuccess } = useContext(SuccessContext);
+  // const { error, setError } = useContext(ErrorContext);
+
+  const { setSuccess, setError } = useSnackbar();
 
   const header = requestHeader({ "Content-Type": "application/json" });
 
+  // get initial product list and filter thme
   useEffect(() => {
     try {
       const fetchData = async () => {
         const response = await axios.get(
-          "http://localhost:5290/api/products/all",
-          { headers: header }
+          "http://localhost:5290/api/products/all"
         );
 
         console.log(response.data);
@@ -55,7 +57,19 @@ const ProductPage = () => {
     } catch (error) {
       setProducts([]);
     }
-  }, []);
+  }, [category]);
+
+  // filter product list  by key words
+  useEffect(() => {
+    const filteredArray = originalProducts.filter((product) =>
+      product.productName.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setProducts(filteredArray);
+  }, [keyword]);
+
+  const handleKeywordChange = (e) => {
+    setKeyword(e.target.value);
+  };
 
   const handleSetOpenChange = (e, product) => {
     e.stopPropagation();
@@ -90,17 +104,6 @@ const ProductPage = () => {
     }
 
     resetModal();
-  };
-
-  useEffect(() => {
-    const filteredArray = originalProducts.filter((product) =>
-      product.productName.toLowerCase().includes(keyword.toLowerCase())
-    );
-    setProducts(filteredArray);
-  }, [keyword]);
-
-  const handleKeywordChange = (e) => {
-    setKeyword(e.target.value);
   };
 
   const handleSortByNameChange = () => {
@@ -168,7 +171,7 @@ const ProductPage = () => {
 
   return (
     <NavbarLayout>
-      <div className="w-full h-full p-8 ">
+      <div className="w-full h-screen p-8 ">
         {/* Product Page Title */}
         <h1 className="text-2xl font-normal">
           {`${category == "cat" ? "Cat" : "Dog"}`} - Products
@@ -255,9 +258,6 @@ const ProductPage = () => {
           </div>
         </>
       </Modal>
-
-      {/* Snackbar Group */}
-      <SnackbarGroup />
     </NavbarLayout>
   );
 };

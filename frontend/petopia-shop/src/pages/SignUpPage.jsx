@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { SuccessContext } from "../context/success-context";
+import useSnackbar from "../hook/useSnackbar";
 
 const SignUpPage = () => {
   // set title page name
@@ -21,7 +22,8 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   // set success state
-  const { setSuccess } = useContext(SuccessContext);
+  // const { setSuccess } = useContext(SuccessContext);
+  const { setSuccess } = useSnackbar();
 
   const [email, setEmail] = useState("");
   const [passwords, setPasswords] = useState({
