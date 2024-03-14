@@ -5,7 +5,8 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using petopia_server; // Replace with the actual namespace of your project
+using petopia_server;
+using petopia_server.Models; // Replace with the actual namespace of your project
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +70,96 @@ builder.Services.AddAuthorization(options =>
 });
 
 var app = builder.Build();
+
+// Add automatic migration
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    try
+    {
+        var context = services.GetRequiredService<MyDbContext>();
+        context.Database.Migrate();
+
+        // Seed the database
+        SeedDatabase(context);
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "An error occurred while migrating the database.");
+    }
+}
+
+// Seed the database
+static void SeedDatabase(MyDbContext context)
+{
+    if (!context.Admins.Any() && !context.Customers.Any() && !context.Categories.Any() && !context.Products.Any() && !context.CustomerOrders.Any())
+    {
+        context.Admins.Add(new Admin
+        {
+            Username = "admin_123",
+            Password = "admin_123",
+            Email = "admin@admin.com"
+        });
+
+        context.Customers.Add(new Customer
+        {
+            CustomerUsername = "customer_a1",
+            CustomerPassword = "customer_a1",
+            CustomerEmail = "customer_a1@gmail.com"
+        });
+
+        context.Customers.Add(new Customer
+        {
+            CustomerUsername = "customer_a2",
+            CustomerPassword = "customer_a2",
+            CustomerEmail = "customer_a2@gmail.com"
+        });
+
+        context.Categories.Add(new Category
+        {
+            CategoryName = "Dog",
+            CategoryDescription = "Anything related to dogs"
+        });
+
+        context.Categories.Add(new Category
+        {
+            CategoryName = "Cat",
+            CategoryDescription = "Anything related to cats"
+        });
+
+        context.SaveChanges();
+
+        context.Products.Add(new Product
+        {
+            ProductName = "Dog Food",
+            ProductDescription = "Food for dogs",
+            ProductPrice = 12,
+            ProductQuantity = 100,
+            ProductKeywords = "dog, food",
+            CategoryId = context.Categories.First(c => c.CategoryName == "Dog").CategoryId
+        });
+
+        context.SaveChanges();
+
+        var currentTime = DateTime.Now.ToString("yyyyMMddHHmmss");
+        var newGuid = Guid.NewGuid().ToString().Split('-')[0]; // Get the first part of the GUID
+        var nextOrderId = $"{newGuid}{currentTime}";
+
+        context.CustomerOrders.Add(new CustomerOrder
+        {
+            OrderId = nextOrderId,
+            CustomerId = context.Customers.First(c => c.CustomerUsername == "customer_a1").CustomerId,
+            Customer = context.Customers.First(c => c.CustomerUsername == "customer_a1"),
+            ProductId = context.Products.First(p => p.ProductName == "Dog Food").ProductId,
+            Product = context.Products.First(p => p.ProductName == "Dog Food"),
+            OrderedQuantity = 10,
+            OrderStatus = "Pending"
+        });
+
+        context.SaveChangesAsync();
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
