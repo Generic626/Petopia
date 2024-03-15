@@ -143,6 +143,7 @@ static void SeedDatabase(MyDbContext context)
             ProductPrice = 12,
             ProductQuantity = 100,
             ProductKeywords = "dog, food",
+            ProductImage = "00dc3f45-6d8a-4d39-9443-89081a2bc8e5.webp",
             CategoryId = context.Categories.First(c => c.CategoryName == "Dog").CategoryId
         });
 
