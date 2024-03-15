@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import useSnackbar from "../hook/useSnackbar.js";
 import axios from "axios";
 import { requestHeader } from "../functions/authentication-header.js";
+import EmptyData from "../components/EmptyData.jsx";
 
 const UserCartPage = () => {
   const [cart, setCart] = useState(readFromCart());
@@ -43,6 +44,8 @@ const UserCartPage = () => {
       }
 
       console.log(finalCart);
+
+      console.log(header);
       await axios.post(
         "http://localhost:5290/api/customerorders/create",
         {
@@ -57,6 +60,7 @@ const UserCartPage = () => {
       resetCart();
       navigate("/");
     } catch (error) {
+      console.log(error);
       setError((prev) => [...prev, "Something went wrong with your order"]);
       navigate("/");
     }
@@ -84,6 +88,7 @@ const UserCartPage = () => {
               />
             );
           })}
+          {cart.length == 0 && <EmptyData message={"Nothing in your cart"} />}
           {/* Product total + Checkout Button */}
           <div className="text-right p-5">
             <h1 className="text-[28px] font-semibold mb-4">

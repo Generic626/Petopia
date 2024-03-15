@@ -11,6 +11,7 @@ import { Modal } from "@mui/material";
 import { SuccessContext } from "../context/success-context";
 import { ErrorContext } from "../context/error-context";
 import useSnackbar from "../hook/useSnackbar";
+import EmptyData from "../components/EmptyData";
 
 const ProductPage = () => {
   // product page states
@@ -229,6 +230,9 @@ const ProductPage = () => {
               />
             );
           })}
+          {products.length == 0 && (
+            <EmptyData message={"Come back again later"} />
+          )}
         </div>
       </div>
 

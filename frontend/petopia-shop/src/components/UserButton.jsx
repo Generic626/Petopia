@@ -40,22 +40,43 @@ const UserButton = () => {
                     </p>
                   </div>
 
-                  <div className="py-1">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="/"
-                          className={`${
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700"
-                          } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
-                        >
-                          Your Profile
-                        </a>
-                      )}
-                    </Menu.Item>
-                  </div>
+                  {user.role != "admin" && (
+                    <div className="py-1">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <NavLink
+                            to={`/profile`}
+                            className={`${
+                              active
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-700"
+                            } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
+                          >
+                            Your Profile
+                          </NavLink>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  )}
+
+                  {user.role != "admin" && (
+                    <div className="py-1">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <NavLink
+                            to={`/order/${user.id}`}
+                            className={`${
+                              active
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-700"
+                            } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
+                          >
+                            Your Orders
+                          </NavLink>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  )}
 
                   {user.role == "admin" && (
                     <div className="py-1">

@@ -20,16 +20,17 @@ const Router = () => {
       <Route path="/admin" element={<AdminLoginPage />} />
       <Route path="/sign-up" element={<SignUpPage />} />
       <Route path="/product/:category" element={<ProductPage />} />
-      {/* <Route path="/checkout" element={<CheckoutPage />} /> */}
-      <Route path="/user-cart" element={<UserCartPage />} />
       <Route
         path="/product-detail/:productId"
         element={<ProductDetailPage />}
       />
-      <Route path="/upload" element={<UploadPage />} />
-      <Route path="/order" element={<OrderPage />} />
-      <Route path="/Profile" element={<ProfilePage />} />
-      <Route path="/test" element={<CheckoutPage />} />
+
+      <Route element={<PrivateRoutes />}>
+        <Route path="/user-cart" element={<UserCartPage />} />
+        <Route path="/upload" element={<UploadPage />} />
+        <Route path="/order/:id" element={<OrderPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+      </Route>
     </Routes>
   );
 };

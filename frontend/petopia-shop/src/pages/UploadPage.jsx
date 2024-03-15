@@ -14,6 +14,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import { requestHeader } from "../functions/authentication-header";
+import useSnackbar from "../hook/useSnackbar";
 
 const UploadPage = () => {
   useEffect(() => {
@@ -23,6 +24,7 @@ const UploadPage = () => {
     };
   }, []);
   const header = requestHeader({ "Content-Type": "application/json" });
+  const { setSuccess } = useSnackbar();
 
   const [isSuccess, setIsSuccess] = useState(false);
   const [productName, setProductName] = useState("");
@@ -110,7 +112,19 @@ const UploadPage = () => {
         },
       })
       .then((response) => {
-        setIsSuccess(true);
+        setSuccess((prev) => [...prev, "Create Item Successful"]);
+
+        setProductName("");
+        setProductDescription("");
+        setProductPrice("");
+        setProductQuantity("");
+        setProductKeywords("");
+        setProductImage(null);
+        setProductCategory("");
+        setErrors({});
+        setPostError([]);
+
+        // setIsSuccess(true);
       })
       .catch((error) => {
         console.log(error);
@@ -173,152 +187,122 @@ const UploadPage = () => {
         </div>
         <br />
         {/* Show Success */}
-        {isSuccess && (
-          <div className="w-full flex flex-col ">
-            <CheckoutSuccess message={"Upload Completed"} />
-            <button
-              className="bg-primary text-white h-[50px] rounded-lg"
-              onClick={() => {
-                window.location.reload();
-              }}
-            >
-              Upload Again
-            </button>
-          </div>
-        )}
-        {!isSuccess && (
-          <div id="detail">
-            <form
-              onSubmit={handleSubmit}
-              action=""
-              className="flex flex-col justify-center items-center w-[100%] p-2 gap-y-2"
-            >
-              {/* productName */}
-              <TextField
-                margin="dense"
+        <div id="detail">
+          <form
+            onSubmit={handleSubmit}
+            action=""
+            className="flex flex-col justify-center items-center w-[100%] p-2 gap-y-2"
+          >
+            {/* productName */}
+            <TextField
+              margin="dense"
+              fullWidth
+              id="productName"
+              label="Product Name"
+              name="productName"
+              autoFocus
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+              error={errors["productName"] ? true : false}
+              helperText={errors["productName"]}
+              required
+            />
+
+            {/* productDescription */}
+            <TextField
+              margin="dense"
+              fullWidth
+              id="productDescription"
+              label="Product Description"
+              name="productDescription"
+              value={productDescription}
+              onChange={(e) => setProductDescription(e.target.value)}
+              required
+            />
+
+            {/* productPrice */}
+            <TextField
+              margin="dense"
+              fullWidth
+              id="productPrice"
+              label="Product Price"
+              name="productPrice"
+              type="number"
+              value={productPrice}
+              onChange={(e) => setProductPrice(e.target.value)}
+              required
+            />
+
+            {/* productQuantity */}
+            <TextField
+              margin="dense"
+              fullWidth
+              id="productQuantity"
+              label="Product Quantity"
+              name="productQuantity"
+              type="number"
+              value={productQuantity}
+              onChange={(e) => setProductQuantity(e.target.value)}
+              required
+            />
+
+            {/* productKeywords */}
+            <TextField
+              margin="dense"
+              fullWidth
+              id="productKeywords"
+              label="Product Keywords"
+              name="productKeywords"
+              value={productKeywords}
+              onChange={(e) => setProductKeywords(e.target.value)}
+            />
+
+            {/* productCategory */}
+            <FormControl fullWidth margin="dense">
+              <InputLabel id="productCategoryLabel">Category *</InputLabel>
+              <Select
                 fullWidth
-                id="productName"
-                label="Product Name"
-                name="productName"
-                autoFocus
-                value={productName}
-                onChange={(e) => setProductName(e.target.value)}
-                error={errors["productName"] ? true : false}
-                helperText={errors["productName"]}
                 required
-              />
-
-              {/* productDescription */}
-              <TextField
-                margin="dense"
-                fullWidth
-                id="productDescription"
-                label="Product Description"
-                name="productDescription"
-                value={productDescription}
-                onChange={(e) => setProductDescription(e.target.value)}
-                required
-              />
-
-              {/* productPrice */}
-              <TextField
-                margin="dense"
-                fullWidth
-                id="productPrice"
-                label="Product Price"
-                name="productPrice"
-                type="number"
-                value={productPrice}
-                onChange={(e) => setProductPrice(e.target.value)}
-                required
-              />
-
-              {/* productQuantity */}
-              <TextField
-                margin="dense"
-                fullWidth
-                id="productQuantity"
-                label="Product Quantity"
-                name="productQuantity"
-                type="number"
-                value={productQuantity}
-                onChange={(e) => setProductQuantity(e.target.value)}
-                required
-              />
-
-              {/* productKeywords */}
-              <TextField
-                margin="dense"
-                fullWidth
-                id="productKeywords"
-                label="Product Keywords"
-                name="productKeywords"
-                value={productKeywords}
-                onChange={(e) => setProductKeywords(e.target.value)}
-              />
-
-              {/* productCategory */}
-              {/* <TextField
-                margin="dense"
-                fullWidth
+                labelId="productCategoryLabel"
                 id="productCategory"
-                label="Product Category"
-                name="productCategory"
-                type="number"
                 value={productCategory}
+                label="Category"
                 onChange={(e) => setProductCategory(e.target.value)}
-              /> */}
-              <FormControl fullWidth margin="dense">
-                <InputLabel id="productCategoryLabel">Category *</InputLabel>
-                <Select
-                  fullWidth
-                  required
-                  labelId="productCategoryLabel"
-                  id="productCategory"
-                  value={productCategory}
-                  label="Category"
-                  onChange={(e) => setProductCategory(e.target.value)}
-                >
-                  {categoryList.map((category) => {
-                    return (
-                      <MenuItem value={category.categoryId}>
-                        {category.categoryName}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-
-              {/* productImage */}
-              <MuiFileInput
-                margin="dense"
-                fullWidth
-                id="productImage"
-                label="Product Image"
-                name="productImage"
-                type="file"
-                placeholder="Click here to upload image"
-                value={productImage}
-                onChange={(e) => setProductImage(e)}
-                required
-              />
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="bg-primary h-[40px] w-full text-white rounded-full mt-4"
               >
-                Upload
-              </button>
-              <NavLink
-                to="/"
-                className="hover:bg-primary border ease-linear duration-200 border-primary h-[40px] w-full text-primary hover:text-white rounded-full mt-4 flex items-center justify-center"
-              >
-                Head Back to Home
-              </NavLink>
-            </form>
-          </div>
-        )}
+                {categoryList.map((category) => {
+                  return (
+                    <MenuItem value={category.categoryId}>
+                      {category.categoryName}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+
+            {/* productImage */}
+            <MuiFileInput
+              margin="dense"
+              fullWidth
+              id="productImage"
+              label="Product Image"
+              name="productImage"
+              type="file"
+              placeholder="Click here to upload image"
+              value={productImage}
+              onChange={(e) => setProductImage(e)}
+              required
+            />
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="bg-primary h-[40px] w-full text-white rounded-full mt-4"
+            >
+              Upload
+            </button>
+          </form>
+        </div>
+        {/* )} */}
       </div>
     </NavbarLayout>
   );

@@ -3,12 +3,12 @@ import success_pic from "../assets/success.png";
 
 const CheckoutSuccessPage = (props) => {
   // Check props contain any data
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   useEffect(() => {
     if (props && props.message) {
       setMessage(props.message);
     } else {
-      setMessage('Purchase Completed');
+      setMessage("Purchase Completed");
     }
   }, [props]);
   return (

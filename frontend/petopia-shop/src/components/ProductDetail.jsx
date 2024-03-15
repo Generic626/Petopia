@@ -1,10 +1,13 @@
-import React, { useRef } from "react";
+import React from "react";
+import { getUser } from "../functions/user-management";
 
 const ProductDetail = (props) => {
   const quantityOptions = Array.from(
     { length: props.stock },
     (_, index) => index + 1
   );
+
+  const user = getUser();
 
   return (
     <div className="text-left grid grid-cols-2 gap-x-16 items-start mx-60 my-20 ">
@@ -45,15 +48,17 @@ const ProductDetail = (props) => {
               </select>
             )}
           </div>
-          <button
-            onClick={props.handleAddToCart}
-            className={`bg-primary rounded-full p-3 text-white w-full ${
-              Number(props.quantity) <= 0 && "cursor-not-allowed"
-            }`}
-            disabled={Number(props.quantity) <= 0}
-          >
-            Add to Cart
-          </button>
+          {user.role != "admin" && (
+            <button
+              onClick={props.handleAddToCart}
+              className={`bg-primary rounded-full p-3 text-white w-full ${
+                Number(props.quantity) <= 0 && "cursor-not-allowed"
+              }`}
+              disabled={Number(props.quantity) <= 0}
+            >
+              Add to Cart
+            </button>
+          )}
         </div>
       </div>
     </div>

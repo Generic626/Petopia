@@ -3,7 +3,7 @@ const getUser = () => {
   const id = sessionStorage.getItem("id");
   const username = sessionStorage.getItem("username");
   const email = sessionStorage.getItem("email");
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   // if current user is admin
   if (role == "admin") {
@@ -24,7 +24,7 @@ const setUser = (id, username, email, contact, address, token, role) => {
   sessionStorage.setItem("email", email);
   sessionStorage.setItem("contact", contact);
   sessionStorage.setItem("address", address);
-  localStorage.setItem("token", token);
+  sessionStorage.setItem("token", token);
   sessionStorage.setItem("role", role);
 };
 
@@ -32,7 +32,7 @@ const setAdmin = (id, username, email, token, role) => {
   sessionStorage.setItem("id", id);
   sessionStorage.setItem("username", username);
   sessionStorage.setItem("email", email);
-  localStorage.setItem("token", token);
+  sessionStorage.setItem("token", token);
   sessionStorage.setItem("role", role);
 };
 
@@ -42,17 +42,10 @@ const signOutUser = () => {
   // window.location.reload();
 };
 
-const updateName = (role) => {};
-
-const retrieveAuthHeader = () => {
-  return "";
+const updateUser = (email, contact, address) => {
+  sessionStorage.setItem("email", email);
+  sessionStorage.setItem("contact", contact);
+  sessionStorage.setItem("address", address);
 };
 
-export {
-  getUser,
-  setUser,
-  setAdmin,
-  signOutUser,
-  retrieveAuthHeader,
-  updateName,
-};
+export { getUser, setUser, setAdmin, signOutUser, updateUser };

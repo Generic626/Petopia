@@ -1,49 +1,59 @@
-import React, { useRef } from "react";
+import React from "react";
+import OrderTableRow from "./OrderTableRow";
 
-const OrderTable = (props) => {
-  
-  {/* Get color for the status cell */}
-  const getStatusColor = (status) => { 
+const OrderTable = ({ order }) => {
+  const getStatusColor = (status) => {
     switch (status) {
-      case 1:
+      case "Completed":
         return "bg-green-200 text-green-500 border-green-500";
-      case 2:
-        return "text-blue-500";
-      case 0:
-        return "bg-red-200 text-red-400 border-red-400";
+      case "Processing":
+        return "bg-yellow-200 text-yellow-400 border-yellow-400";
       default:
         return "text-gray-500";
     }
   };
 
-  {/* Get text for the status cell */}
-  const getStatusText = (status) => {
-    switch (status) {
-      case 1:
-        return "Completed";
-      case 2:
-        return "Test";
-      case 0:
-        return "In Progress";
-      default:
-        return "Unknown";
-    }
-  };
-  
-  {/* The data of the table */}
-  return ( 
+  return (
+    <div className="mb-6">
+      {/* Order Ref + Status */}
+      <div className="h-[40px] w-full flex justify-between">
+        <span>Order Ref: {order.orderId}</span>
+        <span>
+          <span
+            className={`${getStatusColor(
+              order.orderStatus
+            )} px-2 py-2 rounded-lg border`}
+          >
+            • {order.orderStatus}
+          </span>
+        </span>
+      </div>
+      <table className="w-full border mb-6">
+        <thead>
+          {/* The table heading */}
           <tr>
-            <td className="p-4">{props.orderId}</td>
-            <td className="p-4">HK${props.orderTotal}</td>
-            <td className="p-4">
-              <span className={`${getStatusColor(props.orderStatus)} px-2 py-2 rounded-lg border`}>
-                • {getStatusText(props.orderStatus)}
-              </span>
-            </td>
+            <th className="p-4 bg-primary text-white ">Product Name</th>
+            <th className="p-4 bg-primary text-white">Product Price</th>
+            <th className="p-4 bg-primary text-white ">Ordered Quantity</th>
           </tr>
+        </thead>
+        <tbody>
+          {/* The data for the table */}
+          {order.products.map((product, index) => (
+            <OrderTableRow product={product} key={index} />
+          ))}
+        </tbody>
+      </table>
+      {/* Total Price */}
+      <span className="font-medium">
+        Total Price: HKD${" "}
+        {order.products.reduce(
+          (acc, item) => acc + item.orderedQuantity * item.productPrice,
+          0
+        )}
+      </span>
+    </div>
   );
-  };
+};
 
 export default OrderTable;
-
-

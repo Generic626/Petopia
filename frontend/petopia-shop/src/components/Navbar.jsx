@@ -33,18 +33,19 @@ const Navbar = () => {
       </div>
 
       {/* Right side nav items */}
-
       <div className="flex items-center text-white">
-        <FaCartPlus
-          className="h-[30px] w-[30px] mr-8 cursor-pointer"
-          onClick={() => {
-            if (user.role == null) {
-              setWarning((prev) => [...prev, "Please login to view cart"]);
-            } else {
-              navigate("/user-cart");
-            }
-          }}
-        />
+        {user.role != "admin" && (
+          <FaCartPlus
+            className="h-[30px] w-[30px] mr-8 cursor-pointer"
+            onClick={() => {
+              if (user.role == null) {
+                setWarning((prev) => [...prev, "Please login to view cart"]);
+              } else {
+                navigate("/user-cart");
+              }
+            }}
+          />
+        )}
         {user.role == null ? (
           <div className="flex items-center ">
             <FaUserCircle className="h-[30px] w-[30px] mr-2" />
