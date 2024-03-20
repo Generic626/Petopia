@@ -19,7 +19,11 @@ const HomePage = () => {
       {/* Brand Banner */}
       <section className="mt-[100px] relative mb-[60px]">
         {/* Brand Banner Image */}
-        <img src={banner} alt="petopia banner" className="object-cover" />
+        <img
+          src={banner}
+          alt="petopia banner"
+          className="object-cover w-full"
+        />
         {/* Brand Filter */}
         <div className="bg-primary h-full w-full absolute inset-0 opacity-70 text-white" />
         {/* Brand title */}
