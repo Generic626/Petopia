@@ -138,12 +138,45 @@ static void SeedDatabase(MyDbContext context)
 
         context.Products.Add(new Product
         {
-            ProductName = "Dog Food",
-            ProductDescription = "Food for dogs",
+            ProductName = "[AATU] Dog Food (Duck)",
+            ProductDescription = "80% Duck, 20% Fruit & Veg, Grain-Free, Hypoallergenic, Superfood Enriched, 100% Natural, 100% Delicious!",
             ProductPrice = 12,
             ProductQuantity = 100,
             ProductKeywords = "dog, food",
             ProductImage = "00dc3f45-6d8a-4d39-9443-89081a2bc8e5.webp",
+            CategoryId = context.Categories.First(c => c.CategoryName == "Dog").CategoryId
+        });
+
+        context.Products.Add(new Product
+        {
+            ProductName = "[AATU] Dog Food (Salmon & Herring)",
+            ProductDescription = "80% Salmon & Herring, 20% Fruit & Veg, Grain-Free, Hypoallergenic, Superfood Enriched, 100% Natural, 100% Delicious!",
+            ProductPrice = 12,
+            ProductQuantity = 100,
+            ProductKeywords = "dog, food",
+            ProductImage = "621efcd1-0bb4-493b-af54-facb1f860b5a.webp",
+            CategoryId = context.Categories.First(c => c.CategoryName == "Dog").CategoryId
+        });
+
+        context.Products.Add(new Product
+        {
+            ProductName = "[Nulo] Dog Food (Adult)",
+            ProductDescription = "beef, barley & lamb meal recipe",
+            ProductPrice = 10,
+            ProductQuantity = 100,
+            ProductKeywords = "dog, food",
+            ProductImage = "1ab189d9-4a54-42e9-ac26-bf73859f2cbe.webp",
+            CategoryId = context.Categories.First(c => c.CategoryName == "Dog").CategoryId
+        });
+
+        context.Products.Add(new Product
+        {
+            ProductName = "[Nulo] Dog Food (Puppy)",
+            ProductDescription = "chicken, oats & turkey recipe",
+            ProductPrice = 10,
+            ProductQuantity = 100,
+            ProductKeywords = "dog, food",
+            ProductImage = "6e0dc9a9-7db8-4b34-8530-40ea8c0a8843.webp",
             CategoryId = context.Categories.First(c => c.CategoryName == "Dog").CategoryId
         });
 
@@ -158,8 +191,8 @@ static void SeedDatabase(MyDbContext context)
             OrderId = nextOrderId,
             CustomerId = context.Customers.First(c => c.CustomerUsername == "customer_a1").CustomerId,
             Customer = context.Customers.First(c => c.CustomerUsername == "customer_a1"),
-            ProductId = context.Products.First(p => p.ProductName == "Dog Food").ProductId,
-            Product = context.Products.First(p => p.ProductName == "Dog Food"),
+            ProductId = context.Products.First(p => p.ProductName == "[AATU] Dog Food (Duck)").ProductId,
+            Product = context.Products.First(p => p.ProductName == "[AATU] Dog Food (Duck)"),
             OrderedQuantity = 10,
             OrderStatus = "Pending"
         });

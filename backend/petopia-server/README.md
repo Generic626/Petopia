@@ -21,7 +21,11 @@
    ```sh
    dotnet tool install --global dotnet-ef
    ```
-4. Run the server
+4. Add a migration to the database
+   ```sh
+   dotnet ef migrations add Migration-InitialCreate
+   ```
+5. Run the server
    ```sh
     dotnet run
    ```
