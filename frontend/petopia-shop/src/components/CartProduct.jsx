@@ -51,7 +51,11 @@ const CartProduct = ({ product, qty, triggerModal }) => {
       </div>
       {/* Price Information */}
       <div className="flex items-center">
-        <p>Price: HK${product.productPrice * quantity}</p>
+        <p>Price: HK${product.productPrice}</p>
+      </div>
+      {/* Price Information */}
+      <div className="flex items-center">
+        <p>Total Price: HK${product.productPrice * quantity}</p>
       </div>
     </div>
   );

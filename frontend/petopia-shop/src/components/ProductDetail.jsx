@@ -28,7 +28,10 @@ const ProductDetail = (props) => {
 
         {/* Button Groups */}
         <div className="w-full">
-          <div className="ring-2 ring-neutral-400 rounded-full p-3 bg-white flex justify-center items-center mb-5 mt-10 cursor-pointer">
+          <div className="ring-2 ring-neutral-400 rounded-full p-3 bg-white flex justify-center items-center mt-10">
+            <div>Price: ${props.price}</div>
+          </div>
+          <div className="ring-2 ring-neutral-400 rounded-full p-3 bg-white flex justify-center items-center mb-5 mt-5 cursor-pointer">
             {Number(props.quantity) <= 0 ? (
               <span>Out Of Stock</span>
             ) : (

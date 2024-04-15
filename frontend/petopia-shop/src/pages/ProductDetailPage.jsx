@@ -77,6 +77,7 @@ const ProductDetailPage = () => {
           quantity={quantity}
           handleQuantityChange={handleQuantityChange}
           handleAddToCart={handleAddToCart}
+          price={product.productPrice}
         />
       </div>
     </NavbarLayout>

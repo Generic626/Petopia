@@ -121,6 +121,7 @@ const ProfilePage = () => {
 
         setSuccess((prev) => [...prev, "Reset Password Successful"]);
 
+        sessionStorage.clear();
         // redirect user to login
         navigate(`/login`);
       } catch (error) {
